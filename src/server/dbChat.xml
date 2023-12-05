@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chat_db SYSTEM "dbChat.dtd">
+<chat_db>
+    <user_list>
+        <user>
+            <nickName>LDORATO</nickName>
+            <password>PASSWORD</password>
+        </user>
+        <user>
+            <nickName>SDORATO</nickName>
+            <password>PASSWORD</password>
+        </user>
+    </user_list>
+    <ChatList>
+        <chat id="LDORATO_SDORATO">
+            <ChatMessage>
+                <Content>Ciao</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Hey</Content>
+                <Sender>SDORATO</Sender>
+                <Receiver>LDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>jj</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>ok</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>fine</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>dai che sono stanco</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>fine</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>dai che vado a dormire se funziona</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>fine</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>prova</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>test</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>fine</Content>
+                <Sender>LDORATO</Sender>
+                <Receiver>SDORATO</Receiver>
+            </ChatMessage>
+        </chat>
+    </ChatList>
+</chat_db>
