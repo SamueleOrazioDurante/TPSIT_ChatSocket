@@ -24,7 +24,7 @@ public class XMLServerThread extends Thread {
 	private File xmlFile;
 	private Document db;
 
-	protected static final String XML_FILE_NAME = "JavaSocket/XMLObjectTransfer/server/dbChat.xml";
+	protected static final String XML_FILE_NAME = "src\\server\\dbChat.xml";
 
 	
 	public XMLServerThread ( Socket skt, Semaphore SemBin ){
