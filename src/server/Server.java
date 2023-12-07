@@ -5,7 +5,7 @@ import java.io.*;
 import java.net.*;
 import java.util.concurrent.Semaphore;
 
-public class XMLMultiServer {
+public class Server {
 
 	/**
 	 * @param args
@@ -29,7 +29,8 @@ public class XMLMultiServer {
 				System.out.println ("[Server]: nuovo client." );
 
 				//new thread creation passing Connection Socket and Binary Semaphore as input
-				XMLServerThread sThread = new XMLServerThread(clientsock,SemBin);
+				ServerSkeleton sSkeleton = new ServerSkeleton();
+				ServerThread sThread = new ServerThread(clientsock,SemBin,sSkeleton);
 				sThread.start();
 			}
 

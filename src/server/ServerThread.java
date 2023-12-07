@@ -14,7 +14,7 @@ import javax.xml.transform.OutputKeys;
 
 import org.w3c.dom.*;
 
-public class XMLServerThread extends Thread {
+public class ServerThread extends Thread {
 	
 	private Socket client;
 	private Semaphore Sem;
@@ -27,7 +27,7 @@ public class XMLServerThread extends Thread {
 	protected static final String XML_FILE_NAME = "src\\server\\dbChat.xml";
 
 	
-	public XMLServerThread ( Socket skt, Semaphore SemBin ){
+	public ServerThread ( Socket skt, Semaphore SemBin ){
 		client=skt;
 		Sem=SemBin;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
