@@ -27,7 +27,7 @@ public class ServerThread extends Thread {
 	protected static final String XML_FILE_NAME = "src\\server\\dbChat.xml";
 
 	
-	public ServerThread ( Socket skt, Semaphore SemBin ){
+	public ServerThread ( Socket skt, Semaphore SemBin , ServerSkeleton sSkeleton ){
 		client=skt;
 		Sem=SemBin;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
