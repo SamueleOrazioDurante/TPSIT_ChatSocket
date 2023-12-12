@@ -6,20 +6,12 @@ import java.net.*;
 import java.util.concurrent.Semaphore;
 
 public class Server {
-
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
 		try{
-
-			// Welcome socket creation
+			// Socket di benvenuto
 			ServerSocket server = new ServerSocket ( 8000 );
 			System.out.println ("[Server]: in attesa su porta 8000." );
-			// Binary Semaphore creation
+			// Creazione del semaforo
 			Semaphore SemBin = new Semaphore(1);
 			while(true)
 			{
