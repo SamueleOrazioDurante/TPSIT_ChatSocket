@@ -1,3 +1,8 @@
+# MANUALE
+
+....
+
+
 # TPSIT_ChatSocket
 
 # TO-DO
