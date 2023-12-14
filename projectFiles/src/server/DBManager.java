@@ -15,11 +15,12 @@ public class DBManager {
     
     //inizializzazione variabili 
     private static Document db;
-    /* 
+    
+    //TBE
     private final int UserNotFound = 0;
     private final int WrongPassword = 1;
     private final int PasswordChecked = 2;
-    */
+    
 
     protected static final String XML_FILE_PATH = "projectFiles\\src\\server\\dbChat.xml";
     private DocumentBuilder builder;
@@ -58,12 +59,12 @@ public class DBManager {
                 //result diventa utente trovato ma non verificato
             }
         }
+        return result;
     }
 
     //metodo UpdateDB, per aggiungere messaggi
     public synchronized boolean UpdateDB(Element msg){
         Boolean result = false;
-
         
         try {
 
@@ -73,19 +74,70 @@ public class DBManager {
             
             //creazione di un elemento chat con tutti i messaggi della chat tra i due usr e un nodo con il messaggio da aggiungere
             Element chat = db.getElementById(send+"-"+receive);
-            Node newMsg = db.importNode(msg);
+            Node newMsg = db.importNode(msg,true);
 
             //ricerca se la chat esiste o no
             if(chat != null){
                 chat.appendChild(newMsg);
             }else{
-                chat = db.getElementById(send+"-"+receive);
-                //TBD
+                //ricerca se la chat esiste con un nome diverso
+                chat = db.getElementById(receive+"-"+send);
+                if(chat!= null){
+                    chat.appendChild(newMsg);
+                }else{
+                    //se non esiste ne crea una nuova (creo l'elemento chat, metto come attributo id il nome, inserisco dentro il messaggio e la inserisco dentro la lista di chat)
+                    Element chatN = db.createElement("chat");
+                    chatN.setAttribute("id",send+"-"+receive);
+                    chatN.appendChild(newMsg);
+                    Element chatListN = (Element)db.getElementsByTagName("ChatList");
+                    chatListN.appendChild(chatN);
+                }
             }
+            //operazioni svolte con successo
+            result = true;
 
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
+
+        return result;
     }
-        //metodo
+        //metodo per raccogliore dati (messaggi) dal database
+
+        public synchronized NodeList GetDSInfo(String usr_a,String usr_b){
+            NodeList chatMsg = null;
+            //uso il metodo per ritrovare l'elemento chat
+            Element chat = GetChatFromDB(usr_a,usr_b);
+            //uso quell'elemento per ricavare la NodeList dei messaggi
+            if(chat!=null){
+                chatMsg = chat.getChildNodes();
+            }
+            return chatMsg;
+        }
+
+        //metodo per cercare la chat nel database con input gli user
+
+        public synchronized Element GetChatFromDB(String usr_a,String usr_b){
+            //cerco elemento con id i due user
+            Element chat = db.getElementById(usr_a+"-"+usr_b);
+            if (chat == null) {
+                //se non lo trovo,inverso gli user
+                chat = db.getElementById(usr_b+"-"+usr_a);
+            }
+            return chat;
+        }
+
+        //metodo per rimuovere gli spazi bianchi (NOT EDITED)
+
+        public synchronized static void removeWhitespaces(Element element){
+            NodeList children = element.getChildNodes();
+            for(int i = children.getLength()-1;i>=0;i--){
+                Node child = children.item(i);
+                if (child instanceof Text && ((Text) child).getData().trim().isEmpty()) {
+                    element.removeChild(child);
+                }else if(child instanceof Element){
+                    removeWhitespaces((Element)child);
+                }
+            }
+        }
 }
