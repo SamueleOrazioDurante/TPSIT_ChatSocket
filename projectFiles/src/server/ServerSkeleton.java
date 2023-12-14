@@ -9,8 +9,8 @@ public class ServerSkeleton {
     public void skeleton(){
         try{
 			// Socket di benvenuto
-			ServerSocket server = new ServerSocket ( 8000 );
-			System.out.println ("[Server]: in attesa su porta 8000." );
+			ServerSocket server = new ServerSocket ( 6969 );
+			System.out.println ("[Server]: in attesa su porta 6969." );
 			// Creazione del semaforo
 			Semaphore SemBin = new Semaphore(1);
 			while(true)

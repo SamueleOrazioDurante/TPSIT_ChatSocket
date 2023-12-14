@@ -3,20 +3,20 @@
 <chat_db>
     <user_list>
         <user>
-            <nickName>LDORATO</nickName>
-            <password>PASSWORD</password>
+            <nickName>SamOraDur</nickName>
+            <password>Ciao123!</password>
         </user>
         <user>
-            <nickName>SDORATO</nickName>
-            <password>PASSWORD</password>
+            <nickName>RobMaMingo</nickName>
+            <password>Enacoid</password>
         </user>
     </user_list>
     <ChatList>
-        <chat id="LDORATO_SDORATO">
+        <chat id="SamOraDur-RobMaMingo">
             <ChatMessage>
                 <Content>Ciao</Content>
-                <Sender>LDORATO</Sender>
-                <Receiver>SDORATO</Receiver>
+                <Sender>SamOraDur</Sender>
+                <Receiver>RobMaMingo</Receiver>
             </ChatMessage>
         </chat>
     </ChatList>
