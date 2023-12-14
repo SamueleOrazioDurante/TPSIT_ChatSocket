@@ -2,6 +2,7 @@ package server;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 import java.util.concurrent.Semaphore;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,7 +18,10 @@ import org.w3c.dom.*;
 public class ServerThread extends Thread {
 	
 	private Socket client;
-	private Semaphore Sem;
+	private ServerSkeleton sk;
+	HashMap<String,Socket> map;
+	Semaphore map_sem;
+
 	private ObjectInputStream inBuffer;
 	private DataOutputStream outBuffer; 
 	private DocumentBuilder builder;
@@ -27,23 +31,22 @@ public class ServerThread extends Thread {
 	protected static final String XML_FILE_NAME = "src\\server\\dbChat.xml";
 
 	
-	public ServerThread ( Socket skt, Semaphore SemBin , ServerSkeleton sSkeleton ){
-		client=skt;
-		Sem=SemBin;
+	public ServerThread ( Socket C_skt, ServerSkeleton sk, HashMap<String,Socket> addrMap, Semaphore MapSem ){
+		client=C_skt;
+		this.sk = sk;
+		map = addrMap;
+		map_sem = MapSem;
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
-            
-            //DOM Builder(Parser) creation 
             builder = factory.newDocumentBuilder();
 
-            //File Object Creation
             xmlFile = new File(XML_FILE_NAME);
-            
-			//Critical Section: A thread at the time can read the xml file because of it is a shared resource
-			Sem.acquire();
+
+			//FORSE SEMAFORO
             db = builder.parse(xmlFile);
-			Sem.release();
-			//remove white spaces from xml document (it is needed to indent correctly during the writing phase)
+			//FORSE SEMAFORO
+
 			removeWhitespaces(db.getDocumentElement());
 		}catch(Exception e)
 		{
