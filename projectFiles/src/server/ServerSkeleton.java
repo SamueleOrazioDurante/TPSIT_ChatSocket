@@ -30,6 +30,7 @@ public class ServerSkeleton implements ChatFeat{
 
 			//TBD IN GUI (creazione di una gui con terminale del server)
 			System.out.println ("[Server]: in attesa su porta 6969." );
+			//indexGUITEST.addConsoleTerminal("[Server]: in attesa su porta 6969." );
 
 			while(true)
 			{

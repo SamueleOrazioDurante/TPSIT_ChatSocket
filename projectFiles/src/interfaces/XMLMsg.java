@@ -1,11 +1,11 @@
 package interfaces;
 
-public class XMLMessage {
+public class XMLMsg {
     private String Message;
     private String Sender;
     private String Receiver;
 
-    public XMLMessage(String m, String s, String r)
+    public XMLMsg(String m, String s, String r)
     {
         Message = m;
         Sender = s;

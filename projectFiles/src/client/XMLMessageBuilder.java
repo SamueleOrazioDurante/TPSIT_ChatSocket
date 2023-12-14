@@ -6,11 +6,11 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import interfaces.XMLMessage;
+import interfaces.XMLMsg;
 
 public class XMLMessageBuilder {
     
-    private XMLMessage msg;
+    private XMLMsg msg;
     private static DocumentBuilderFactory docFactory;
     private static DocumentBuilder docBuilder;
     private static Boolean instanciated = false;
@@ -18,7 +18,7 @@ public class XMLMessageBuilder {
     public XMLMessageBuilder(String m, String s, String r)
     {
         //create a message (text+sender+receiver)
-        msg = new XMLMessage(m, s, r);
+        msg = new XMLMsg(m, s, r);
         if(!instanciated)
         {
             try
