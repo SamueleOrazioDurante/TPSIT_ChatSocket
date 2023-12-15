@@ -11,163 +11,112 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import javax.xml.transform.OutputKeys;
 
-import org.w3c.dom.*;
+import client.XMLMessageBuilder;
+import interfaces.XMLMsgBuilder;
 
 public class ServerThread extends Thread {
 	
-	private Socket client;
+	private Socket clientSocket;
 	private ServerSkeleton sk;
-	HashMap<String,Socket> map;
-	Semaphore map_sem;
+	private HashMap<String,Socket> map;
+	private Semaphore map_sem;
+
+	private final int SendMessage = 1;
 
 	private ObjectInputStream inBuffer;
-	private DataOutputStream outBuffer; 
-	private DocumentBuilder builder;
-	private File xmlFile;
-	private Document db;
-
-	protected static final String XML_FILE_NAME = "src\\server\\dbChat.xml";
+	private ObjectOutputStream outBuffer; 
+	private XMLMsgBuilder msgBuilder;
 
 	
-	public ServerThread ( Socket C_skt, ServerSkeleton sk, HashMap<String,Socket> addrMap, Semaphore MapSem ){
-		client=C_skt;
+	public ServerThread (Socket clientSocket, ServerSkeleton sk, HashMap<String,Socket> addrMap, Semaphore MapSem ){
+		this.clientSocket=clientSocket;
 		this.sk = sk;
 		map = addrMap;
 		map_sem = MapSem;
-
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            builder = factory.newDocumentBuilder();
-
-            xmlFile = new File(XML_FILE_NAME);
-
-			//FORSE SEMAFORO
-            db = builder.parse(xmlFile);
-			//FORSE SEMAFORO
-
-			removeWhitespaces(db.getDocumentElement());
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		msgBuilder = new XMLMsgBuilder();
 	}
 	
 	public void run (){
-		
 		try{
-			
-			//Input and Output stream creation 
-			
-			outBuffer = new DataOutputStream ( client.getOutputStream());	
-			inBuffer = new ObjectInputStream(client.getInputStream());
-			Boolean ended = false;
-			while(!ended)
+			Boolean end = false;
+			while(!end)
 			{
-				// waiting for client xml message
-				System.out.println ("	[Server-Worker]: attesa messaggio dal client..." );
-				Document msgDoc = (Document)inBuffer.readObject();
-				//get the message content
-				String Message = msgDoc.getElementsByTagName("Content").item(0).getTextContent();
-				System.out.println ("	[Server-Worker]: Messaggio ricevuto < " + Message + ">. Invio risposta." );
+				//istanza dei buffer di input e output per la comunicazione client/server
+				outBuffer = new ObjectOutputStream (clientSocket.getOutputStream());	
+				inBuffer = new ObjectInputStream(clientSocket.getInputStream());
 				
-				//Update XML DB with the new message
-				UpdateXMLDB(msgDoc);
-				// send response
-				outBuffer.writeUTF(Message);
-				if(Message.equals("fine"))
-				{
-					ended = true;
+				//in attesa di un messaggio dal client (con stampa su server GUI)
+				sk.AddMsgTerminal("	[Server-Th]: attesa messaggio dal client..." );
+				Document msgPkt = (Document)inBuffer.readObject();
+
+				//switch case per ricerca tipologia di operazione
+				String op = msgPkt.getElementsByTagName("Operation").item(0).getTextContent();
+				switch (op) {
+					case "login":{
+						String usr = msgPkt.getElementsByTagName("nickname").item(0).getTextContent(); //da cambiare
+						String psw = msgPkt.getElementsByTagName("password").item(0).getTextContent(); //da cambiare
+						int result = sk.Login(usr, psw);
+
+						outBuffer.writeObject(result);
+						
+						//se il login ha successo allora viene registrato l'utente nell'hash map
+						if (result==2) {
+							map_sem.acquire();
+							map.put(usr,clientSocket);
+							map_sem.release();
+						//altrimenti viene chiusa la connessione con il client
+						}else{
+							clientSocket.close();
+							inBuffer.close();
+							outBuffer.close();
+							end=true;
+						}
+						break;
+					}
+					case "loadChat":{
+						String reQUser = msgPkt.getElementsByTagName("localUser").item(0).getTextContent();
+						String toSearchUser = msgPkt.getElementsByTagName("remoteUser").item(0).getTextContent();
+						NodeList msgs = sk.LoadChat(reQUser, toSearchUser);
+						Document chat = msgBuilder.createChatXMLObj(msgs); //TO BE FOUND
+						outBuffer.writeObject(chat);
+						break;
+					}	
+					case "sendMessage":{
+						Element msg = (Element) msgPkt.getElementsByTagName("Chat").item(0); //CHAT È DA CAMBIARE
+						String receive = sk.SendMsg(msg);
+						
+						map_sem.acquire();
+						Socket receiveSkt = map.get(receive);
+						map_sem.release();
+
+						//invio messaggio al client receiver
+						ObjectOutputStream oos = new ObjectOutputStream(receiveSkt.getOutputStream()); //TO BE FOUND
+						Document msgPktOut = msgBuilder.createMsgXMLObj(msg); //TO BE FOUND
+						oos.writeObject(msgPktOut);
+						
+						//pacchetto per informare il mittente che il messaggio è arrivato al destinatario
+						Document ackPacket = msgBuilder.createAckXMLObj();
+						outBuffer.writeObject(ackPacket);
+
+						break;
+					}	
+					case "loadContacts":{
+						break;
+					}	
+				
+					default:
+						break;
 				}
 			}
-			
-			//Write the updated DB
-			TransformerFactory tFactory = TransformerFactory.newInstance();
-			Transformer transformer;
-			transformer = tFactory.newTransformer();
-						DOMSource source = new DOMSource(db);
-						StreamResult result = new StreamResult(xmlFile);
-			//It is neede to indent the xml file
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			DocumentType doctype = db.getDoctype();
-			//it is needed to include the dtd declaration in xml file
-			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
-			
-			//Critical section to write in xml file
-			Sem.acquire();
-			transformer.transform(source, result);
-			Sem.release();
-			
-			//buffer and socket closing
-			inBuffer.close();
-			outBuffer.close();
-			client.close();
-	
-
-			
-		}catch (Exception e ){
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-
-	public void UpdateXMLDB(Document m)
-	{
-		      
-
-        try {
-            //get sender and receiver by xml message object
-			String sender = m.getElementsByTagName("Sender").item(0).getTextContent();
-			String receiver = m.getElementsByTagName("Receiver").item(0).getTextContent();
-			//search the chat element with id sender_receiver
-			Element chat = db.getElementById(sender+"_"+receiver);
-			//import chat message node from xml message object to xml db object and get it in newMessage
-			Node newMessage = db.importNode(m.getDocumentElement() /*m.getElementsByTagName("ChatMessage").item(0)*/, isAlive());
-			
-			if(chat != null)
-			{
-				//if id sender_receiver not found try to found receiver_sender
-				chat.appendChild(newMessage);
-			}
-			else
-			{
-				
-				chat = db.getElementById(receiver+"_"+sender);
-				if(chat != null)
-				{
-					chat.appendChild(newMessage);
-				}
-				else
-				{
-					//if id not found add a new chat with id sender_receiver
-					Element chatNew = db.createElement("chat");
-					chatNew.setAttribute("id", sender+"_"+receiver);
-					chatNew.appendChild(newMessage);
-					Element chatList = (Element)db.getElementsByTagName("ChatList").item(0);
-					chatList.appendChild(chatNew);
-				}
-			}
-
-            
-            
-
-        } catch (Throwable t) {
-            t.printStackTrace ();
-        }
-        
-    }
-
-	public static void removeWhitespaces(Element element) {
-		NodeList children = element.getChildNodes();
-		for (int i = children.getLength() - 1; i >= 0; i--) {
-			Node child = children.item(i);
-			if (child instanceof Text
-				&& ((Text) child).getData().trim().isEmpty()) {
-				element.removeChild(child);
-			} else if (child instanceof Element) {
-				removeWhitespaces((Element) child);
-			}
-		}
-	}
-
 }
