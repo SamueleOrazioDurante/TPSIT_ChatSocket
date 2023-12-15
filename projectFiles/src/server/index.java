@@ -5,7 +5,8 @@ public class index {
 		//inizializazione di istanze di database, server reale e server proxy
 		DBManager dbManager = new DBManager();
 		Server serverReale = new Server(dbManager);
-		ServerSkeleton serverSkeleton = new ServerSkeleton(serverReale);
+		indexGUITEST GUI = new indexGUITEST();
+		ServerSkeleton serverSkeleton = new ServerSkeleton(serverReale,GUI);
 		
 		//start del server proxy
 		serverSkeleton.skeleton();

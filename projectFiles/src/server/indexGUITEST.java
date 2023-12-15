@@ -11,11 +11,16 @@ package server;
  */
 public class indexGUITEST extends javax.swing.JFrame {
 
+    DBManager dbManager;
+    Server serverReale;
+    ServerSkeleton serverSkeleton;
     /**
      * Creates new form indexGUITEST
      */
     public indexGUITEST() {
         initComponents();
+
+
     }
 
     /**
@@ -61,6 +66,7 @@ public class indexGUITEST extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -85,18 +91,10 @@ public class indexGUITEST extends javax.swing.JFrame {
                 new indexGUITEST().setVisible(true);
             }
         });
-
-        //inizializazione di istanze di database, server reale e server proxy
-		DBManager dbManager = new DBManager();
-		Server serverReale = new Server(dbManager);
-		ServerSkeleton serverSkeleton = new ServerSkeleton(serverReale);
-		
-		//start del server proxy
-		serverSkeleton.skeleton();
     }
 
     public void addConsoleTerminal(String msg){
-        jTextArea1.append("[Server]: in attesa su porta 6969." );
+        jTextArea1.append(msg);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
