@@ -1,7 +1,5 @@
 package interfaces;
 
-
-
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -12,4 +10,5 @@ public interface ChatFeat {
     public String SendMsg(Element msg);
 
     public NodeList LoadContacts(String usr);
+    public void AddMsgTerminal(String msg);
 }

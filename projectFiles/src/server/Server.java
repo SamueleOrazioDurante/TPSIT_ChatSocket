@@ -9,14 +9,17 @@ public class Server implements ChatFeat{
 
     //inizializzazione variabili 
     private DBManager dbm;
-    
+    private serverGUI gui;
+
     //TBE
     private final int UserNotFound = 0;
     private final int WrongPassword = 1;
     private final int PasswordChecked = 2;
 
-	public Server(DBManager db){
+	public Server(DBManager db,serverGUI gui){
         this.dbm=db;
+        this.gui=gui;
+        gui.setVisible(true);
     }
 
     @Override
@@ -56,5 +59,11 @@ public class Server implements ChatFeat{
         //
         NodeList node = null;
         return node; 
+    }
+
+    @Override
+    //metodo per utilizzo GUI
+    public void AddMsgTerminal(String msg){
+        gui.addConsoleTerminal(msg);
     }
 }

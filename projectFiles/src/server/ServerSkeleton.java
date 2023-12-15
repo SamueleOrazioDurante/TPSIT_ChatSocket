@@ -16,13 +16,11 @@ public class ServerSkeleton implements ChatFeat{
 	HashMap<String,Socket> addrMap;
 	Semaphore MapSem;
 	Server serverReale;
-	indexGUITEST GUI;
 
-	public ServerSkeleton(Server serverReale,indexGUITEST GUI){
+	public ServerSkeleton(Server serverReale){
 		addrMap = new HashMap<String,Socket>();
 		MapSem = new Semaphore(1);
 		this.serverReale = serverReale;
-		this.GUI = GUI;
 	}
 
     public void skeleton(){
@@ -31,8 +29,8 @@ public class ServerSkeleton implements ChatFeat{
 			ServerSocket SocketServer = new ServerSocket ( 6969 );
 
 			//TBD IN GUI (creazione di una gui con terminale del server)
-			GUI.setVisible(true);
-			GUI.addConsoleTerminal("[Server]: in attesa su porta 6969.");
+			
+			this.AddMsgTerminal("[Server]: in attesa su porta 6969.");
 
 			while(true)
 			{
@@ -40,7 +38,7 @@ public class ServerSkeleton implements ChatFeat{
 				Socket clientsock = SocketServer.accept();
 
 				//TBD GUI
-				GUI.addConsoleTerminal("[Server]: nuovo client." );
+				this.AddMsgTerminal("[Server]: nuovo client." );
 
 				//start di un nuovo thread per ogni connessione al client con una porta definita dal protocollo delle socket in java 
 				//(come parametri abbiamo il numero della porta, lo skeleton che avvia il thread, il riferimento alla'hash map e il semaforo per l'utilizzo della map)
@@ -76,5 +74,11 @@ public class ServerSkeleton implements ChatFeat{
     //metodo da server reale
     public NodeList LoadContacts(String usr){
         return serverReale.LoadContacts(usr);
+    }
+
+	@Override
+    //metodo per utilizzo GUI
+    public void AddMsgTerminal(String msg){
+        serverReale.AddMsgTerminal(msg);
     }
 }
