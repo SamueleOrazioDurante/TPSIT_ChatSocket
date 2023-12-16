@@ -29,9 +29,9 @@ Phasellus tristique id arcu ut tincidunt. Nulla tempor ornare lacus at suscipit.
 ## 🧑 Autori
 
 - Durante -> [@SamOraDur](https://www.github.com/SamOraDur)
-- [@Matt3opower](https://github.com/Matt3opower)
-- [@SonMiCiao](https://github.com/SonMiCiao)
-- [@MarkTRF](https://github.com/MarkTRF)
+- Magnani -> [@Matt3opower](https://github.com/Matt3opower)
+- Mingon -> [@SonMiCiao](https://github.com/SonMiCiao)
+- Ponechal -> [@MarkTRF](https://github.com/MarkTRF)
 
 
 
