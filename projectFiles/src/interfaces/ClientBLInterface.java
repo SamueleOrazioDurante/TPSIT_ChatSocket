@@ -3,7 +3,8 @@ package interfaces;
 import java.util.ArrayList;
 import client.Message;
 
-public interface ClientBLInterface {
+//identifica la logica dal lato del client implementato dal loggedIndex
+public interface ClientBLInterface{
     //CAMBIARE IL NOME, CAPIRE IL FUNZIONAMENTO
 
     int LoadingChat(ArrayList<Message> messages);

@@ -11,19 +11,49 @@ import org.w3c.dom.NodeList;
 
 public class XMLMsgBuilder {
 
-    DocumentBuilder docBuild;
-    
+    private static DocumentBuilderFactory factory;
+    private static DocumentBuilder docBuild;
+    private static Boolean exist = false;
+
     public XMLMsgBuilder(){
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            docBuild = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+
+        //costruttore parte solo una volta
+        if(!exist){
+            factory = DocumentBuilderFactory.newInstance();
+            try {
+                docBuild = factory.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            exist = true;
         }
+    }
+
+    //metodo creazione paccheto login
+    public Document createLoginXMLObj(String usr,String psw){
+        //creazione documento e elemento radice
+        Document doc = docBuild.newDocument();
+        Element rootElement = doc.createElement("XMLPkt");
+        doc.appendChild(rootElement);
+
+        //crezione dell'elemento Operation che contiene l'operazione che si sta svolgendo
+        Element e = doc.createElement("Operation");
+        e.setTextContent("Login");
+        rootElement.appendChild(e);
+
+       //elemento username 
+        e.setTextContent("username");
+        rootElement.appendChild(e);
+
+        //elemento password
+        e.setTextContent("oassword");
+        rootElement.appendChild(e);
+        
+        return doc;
     }
     
 
-    //metodo trasportmagione NodeList in Document
+    //metodo trasformazione NodeList in Document
     public Document createChatXMLObj(NodeList chat){
 
         //creazione documento e elemento radice
@@ -57,7 +87,7 @@ public class XMLMsgBuilder {
 
         //vengono creati un elemento operation e un nodo messaggio che conterrà il contenuto del messaggio stesso
         Element e = doc.createElement("Operation");
-        e.setTextContent("MsgFwd");
+        e.setTextContent("SendMsg"); //ex MsgFwd
         rootElement.appendChild(e);
         Node msgXML = doc.importNode(msg, true);
         rootElement.appendChild(msgXML);
