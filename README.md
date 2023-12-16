@@ -26,7 +26,7 @@ Sed a euismod augue, id pharetra magna. Donec at blandit odio. Vestibulum urna d
 
 Phasellus tristique id arcu ut tincidunt. Nulla tempor ornare lacus at suscipit. Suspendisse potenti. Nullam nec semper justo. Nam feugiat faucibus purus. Praesent velit eros, consectetur at cursus eget, molestie non augue. In molestie blandit lectus, cursus volutpat metus dignissim non. Quisque blandit, nisi sed eleifend auctor, metus tellus elementum dolor, vitae pretium sapien quam vitae ipsum. Sed dolor purus, sodales sit amet nisi quis, convallis tempus felis. Sed mauris neque, aliquam at lacus ac, maximus vulputate lacus. Quisque ultricies massa non erat iaculis, ultricies consequat dolor elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce at convallis leo, eget varius nulla.
 
-<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/png/perManuale/GIFTest.gif"  height="275">
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/png/perManuale/GIFTest.gif"  height="2000">
 
 ## 🧑 Autori
 
