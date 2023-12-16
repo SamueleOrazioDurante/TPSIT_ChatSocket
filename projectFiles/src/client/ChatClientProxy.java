@@ -89,4 +89,11 @@ public class ChatClientProxy implements ChatFeat{
         String TDB = null;
         return TDB;
     }
+
+    @Override
+    //metodo
+    public NodeList LoadContacts(String usr){
+        NodeList s = null;
+        return s;
+    }
 }

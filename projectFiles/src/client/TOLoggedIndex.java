@@ -9,3 +9,5 @@ private void AddContacts(String contact, int contactIndex){
 private void AddChatText(String txt, String send){
     VIDEO CHAT MINUTO 11.37
 }
+
+VARIABILI GLOBALI A MINUTO 15.44

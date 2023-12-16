@@ -55,7 +55,7 @@ public class ServerThread extends Thread {
 					case "login":{
 						String usr = msgPkt.getElementsByTagName("nickname").item(0).getTextContent(); //da cambiare
 						String psw = msgPkt.getElementsByTagName("password").item(0).getTextContent(); //da cambiare
-						int result = sk.Login(usr, psw);
+						int result = sk.login(usr, psw);
 
 						outBuffer.writeObject(result);
 						

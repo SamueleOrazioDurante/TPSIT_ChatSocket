@@ -24,7 +24,7 @@ public class Server implements ChatFeat{
 
     @Override
     //metodo per verificare che l'utente esista e che le credenziali siano corrette
-    public int Login(String usr,String psw){
+    public int login(String usr,String psw){
         int result = UserNotFound;
         switch (dbm.CheckUser(usr, psw)){
             case 1:
@@ -61,7 +61,6 @@ public class Server implements ChatFeat{
         return node; 
     }
 
-    @Override
     //metodo per utilizzo GUI
     public void AddMsgTerminal(String msg){
         gui.addConsoleTerminal(msg);

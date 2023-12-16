@@ -54,8 +54,8 @@ public class ServerSkeleton implements ChatFeat{
 
 	@Override
     //metodo da server reale
-    public int Login(String usr,String psw){
-        return serverReale.Login(usr,psw);
+    public int login(String usr,String psw){
+        return serverReale.login(usr,psw);
     }
 
     @Override
@@ -76,7 +76,6 @@ public class ServerSkeleton implements ChatFeat{
         return serverReale.LoadContacts(usr);
     }
 
-	@Override
     //metodo per utilizzo GUI
     public void AddMsgTerminal(String msg){
         serverReale.AddMsgTerminal(msg);

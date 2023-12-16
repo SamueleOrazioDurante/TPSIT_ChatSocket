@@ -10,5 +10,4 @@ public interface ChatFeat {
     public String SendMsg(Element msg);
 
     public NodeList LoadContacts(String usr);
-    public void AddMsgTerminal(String msg);
 }
