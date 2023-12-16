@@ -9,9 +9,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.xml.transform.OutputKeys;
-
-import client.XMLMessageBuilder;
 import interfaces.XMLMsgBuilder;
 
 public class ServerThread extends Thread {
@@ -20,8 +17,6 @@ public class ServerThread extends Thread {
 	private ServerSkeleton sk;
 	private HashMap<String,ObjectOutputStream> map;
 	private Semaphore map_sem;
-
-	private final int SendMessage = 1;
 
 	private ObjectInputStream inBuffer;
 	private ObjectOutputStream outBuffer; 

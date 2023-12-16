@@ -6,18 +6,14 @@ package client;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.*;
 
 
 /**
  *
- * @author lucad
+ * @author SamOraDur
  */
 public class LoggedIndex extends javax.swing.JFrame {
 
