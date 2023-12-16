@@ -22,7 +22,7 @@ public class XMLClient {
 	public static void main(String[] args) {
 		
 		try{
-			Socket s = new Socket ("127.0.0.1", 8000 );
+			Socket s = new Socket ("127.0.0.1", 6969 );
 			//Creating Input and output buffer for the comunication with server side application
 			//(Output stream buffer is ObjectOutputStream type in order to send an xml object) 
 			DataInputStream fromServer = new DataInputStream ( s.getInputStream() );
