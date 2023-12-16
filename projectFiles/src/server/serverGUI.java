@@ -87,7 +87,8 @@ public class serverGUI extends javax.swing.JFrame {
     }
 
     public void addConsoleTerminal(String msg){
-        jTextArea1.append(msg);
+        //msg.stripLeading(); //probabilmente non necessario
+        jTextArea1.append(" "+msg+"\n");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
