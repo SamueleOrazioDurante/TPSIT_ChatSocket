@@ -1,3 +1,5 @@
+/* 
+
 NELLE VARIABILI DELLA ClassNotFoundException
 
     ChatClientProxy proxy;
@@ -26,3 +28,4 @@ IN BUTTON CLICKED FUNCTION
         JOptionPane.showMessageDialog(null,"User o password errati");
 
     }
+    */

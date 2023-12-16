@@ -1,3 +1,5 @@
+/* 
+
 implements ClientBLInterface;
 
 //creazione panel per ogni contatto
@@ -11,3 +13,5 @@ private void AddChatText(String txt, String send){
 }
 
 VARIABILI GLOBALI A MINUTO 15.44
+
+*/
