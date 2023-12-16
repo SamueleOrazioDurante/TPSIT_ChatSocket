@@ -32,3 +32,5 @@ Phasellus tristique id arcu ut tincidunt. Nulla tempor ornare lacus at suscipit.
 
 - [Presentazione](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/Documentation/presentazione.ptt)
 
+![Logo](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/png/logo/logo.jpeg)
+
