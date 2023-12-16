@@ -95,10 +95,10 @@ public class Login2 extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("png\\icon\\login\\human.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\human.png")); // NOI18N
 
         disabile_eye.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        disabile_eye.setIcon(new javax.swing.ImageIcon("png\\icon\\login\\open_eye.png")); // NOI18N
+        disabile_eye.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\open_eye.png")); // NOI18N
         disabile_eye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         disabile_eye.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -106,7 +106,7 @@ public class Login2 extends javax.swing.JFrame {
             }
         });
 
-        enable_eye.setIcon(new javax.swing.ImageIcon("png\\icon\\login\\closed_eye.png")); // NOI18N
+        enable_eye.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\closed_eye.png")); // NOI18N
         enable_eye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         enable_eye.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -180,7 +180,7 @@ public class Login2 extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(18, 18, 18));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("png\\logo\\logo-nobg.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\logo\\logo-nobg.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -202,9 +202,9 @@ public class Login2 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
             .addComponent(titleBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -216,10 +216,10 @@ public class Login2 extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(43, Short.MAX_VALUE))))
+                        .addGap(23, 23, 23))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
