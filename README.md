@@ -1,4 +1,6 @@
 
+![Logo](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/png/logo/logo.jpeg)
+
 # 💬 Ketu
 
 Un'app di messaggistica... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet mollis diam. Praesent turpis enim, vestibulum non ullamcorper eu, lobortis ut nisl. Donec libero libero, gravida at gravida pharetra, aliquam nec nunc. Aliquam vitae metus nulla. Quisque fringilla massa eget aliquam efficitur. Vivamus velit turpis, laoreet ac odio nec, rutrum tristique ligula. Nunc dictum dui vitae mauris lacinia commodo. Curabitur ut tempor dolor. Mauris facilisis ultricies efficitur. Pellentesque vulputate turpis sed euismod viverra. Curabitur auctor quis leo volutpat porttitor. Mauris lorem sapien, cursus at tristique sed, dignissim a magna. Ut consectetur lacinia arcu eget auctor. Pellentesque ut consectetur magna. Vivamus et erat mauris.
@@ -32,5 +34,5 @@ Phasellus tristique id arcu ut tincidunt. Nulla tempor ornare lacus at suscipit.
 
 - [Presentazione](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/Documentation/presentazione.ptt)
 
-![Logo](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/png/logo/logo.jpeg)
+
 
