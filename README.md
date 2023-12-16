@@ -4,7 +4,7 @@
 # 💬 Ketu
 
 Ketu è un'applicazione di messaggistica che ti permette di comunicare con i tuoi amici, familiari e colleghi in modo semplice e veloce. 
-Questo progetto è stato sviluppato in seguito a un compito assegnatoci dal prof. **** ****** sviluppato in gruppi da 4 persone (contribuiti linkati alla fine della pagina) e tramite l'utilizzo dell'argomento teorico svolto sulle *socket in Java* e l'utilizzo di applicativi come NetBeans per l'apparato grafico.
+Questo progetto è stato sviluppato in seguito a un compito assegnatoci dal prof. **** ****** sviluppato in gruppi da 4 persone (contributi linkati alla fine della pagina) e tramite l'utilizzo dell'argomento teorico svolto sulle *socket in Java* e l'utilizzo di applicativi come NetBeans per l'apparato grafico.
 
 ## 📕 Manuale
 
@@ -28,7 +28,7 @@ Phasellus tristique id arcu ut tincidunt. Nulla tempor ornare lacus at suscipit.
 
 ## 🧑 Autori
 
-- [@SamOraDur](https://www.github.com/SamOraDur)
+- Durante -> [@SamOraDur](https://www.github.com/SamOraDur)
 - [@Matt3opower](https://github.com/Matt3opower)
 - [@SonMiCiao](https://github.com/SonMiCiao)
 - [@MarkTRF](https://github.com/MarkTRF)
