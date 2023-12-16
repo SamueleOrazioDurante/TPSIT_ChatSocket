@@ -3,5 +3,9 @@
         "lib/**/*.jar",
         "c:\\Users\\matt3\\Downloads\\java-window-title-bar-main\\java-window-title-bar-main\\gradient-icon-font.jar",
         "c:\\Users\\matt3\\Downloads\\java-window-title-bar-main\\java-window-title-bar-main\\TimingFramework-0.55.jar"
+    ],
+    "java.project.sourcePaths": [
+        "projectFiles/src",
+        "projectFiles/lib"
     ]
 }
