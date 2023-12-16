@@ -54,11 +54,7 @@ public class Server implements ChatFeat{
     @Override
     //metodo per caricare i contatti 
     public NodeList LoadContacts(String usr){
-        //TBD
-        //
-        //
-        NodeList node = null;
-        return node; 
+        return dbm.GetContacts(usr);
     }
 
     //metodo per utilizzo GUI

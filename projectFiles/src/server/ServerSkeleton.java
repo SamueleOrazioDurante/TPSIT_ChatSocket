@@ -1,6 +1,7 @@
 package server;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -13,12 +14,12 @@ import interfaces.ChatFeat;
 
 public class ServerSkeleton implements ChatFeat{
 
-	HashMap<String,Socket> addrMap;
+	HashMap<String,ObjectOutputStream> addrMap;
 	Semaphore MapSem;
 	Server serverReale;
 
 	public ServerSkeleton(Server serverReale){
-		addrMap = new HashMap<String,Socket>();
+		addrMap = new HashMap<String,ObjectOutputStream>();
 		MapSem = new Semaphore(1);
 		this.serverReale = serverReale;
 	}

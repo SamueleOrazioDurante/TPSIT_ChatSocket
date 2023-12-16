@@ -109,6 +109,51 @@ public class XMLMsgBuilder {
         return doc;
     }
 
-    
+    //metodo per caricare i contatti dal db al client
+    public Document createLoadContactRequestXMLObj(String usr){
+
+        Document doc = docBuild.newDocument();
+        Element rootElement = doc.createElement("XMLPkt");
+        doc.appendChild(rootElement);
+
+        //vengono creati un elemento operation e un nodo che contiene l'utente che contiene tutti gli altri utenti
+        Element e = doc.createElement("Operation");
+        e.setTextContent("ContactRequest");
+        rootElement.appendChild(e);
+
+        e = doc.createElement("user");
+        e.setTextContent(usr);
+        rootElement.appendChild(e);
+
+        return doc;
+    }
+
+    //metodo per creazione pacchetto XML con tutti i contatti all'interno
+    public Document createContactsXMLObj(NodeList contacts){
+
+        //creazione documento e elemento radice
+        Document doc = docBuild.newDocument();
+        Element rootElement = doc.createElement("XMLPkt");
+        doc.appendChild(rootElement);
+
+        //crezione dell'elemento Operation che contiene l'operazione che si sta svolgendo
+        Element e = doc.createElement("Operation");
+        e.setTextContent("ContactsLoading");
+        rootElement.appendChild(e);
+
+        //si crea infine l'elemento chat vero e proprio contenente ogni user
+        Element eUser = doc.createElement("user");
+
+        for(int i = 0; i<contacts.getLength();i++){
+
+            Node contact = doc.importNode(contacts.item(i),true);
+            eUser.appendChild(contact);
+        }
+
+        rootElement.appendChild(eUser);
+        
+        return doc;
+    }
+
 }
 

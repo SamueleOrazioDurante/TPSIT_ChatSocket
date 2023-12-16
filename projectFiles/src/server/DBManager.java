@@ -140,4 +140,11 @@ public class DBManager {
                 }
             }
         }
+
+        //metodo per ottenere la lista di tutti i contatti
+
+        public synchronized NodeList GetContacts(String usr){
+            NodeList contacts = db.getElementsByTagName("user");
+            return contacts;
+        }
 }

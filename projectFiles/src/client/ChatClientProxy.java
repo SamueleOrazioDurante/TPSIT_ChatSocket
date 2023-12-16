@@ -93,7 +93,21 @@ public class ChatClientProxy implements ChatFeat{
     @Override
     //metodo
     public NodeList LoadContacts(String usr){
-        NodeList s = null;
-        return s;
+        
+        try {
+
+            //apertura canale di comunicazione out
+            ObjectOutputStream oos = new ObjectOutputStream(skt.getOutputStream());
+
+            //manda il pacchetto con la richiesta degli utenti al server
+            Document pkt = msgBuilder.createLoadContactRequestXMLObj(usr);
+            oos.writeObject(pkt);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
     }
 }

@@ -18,7 +18,7 @@ public class ServerThread extends Thread {
 	
 	private Socket clientSocket;
 	private ServerSkeleton sk;
-	private HashMap<String,Socket> map;
+	private HashMap<String,ObjectOutputStream> map;
 	private Semaphore map_sem;
 
 	private final int SendMessage = 1;
@@ -28,7 +28,7 @@ public class ServerThread extends Thread {
 	private XMLMsgBuilder msgBuilder;
 
 	
-	public ServerThread (Socket clientSocket, ServerSkeleton sk, HashMap<String,Socket> addrMap, Semaphore MapSem ){
+	public ServerThread (Socket clientSocket, ServerSkeleton sk, HashMap<String,ObjectOutputStream> addrMap, Semaphore MapSem ){
 		this.clientSocket=clientSocket;
 		this.sk = sk;
 		map = addrMap;
@@ -39,11 +39,13 @@ public class ServerThread extends Thread {
 	public void run (){
 		try{
 			Boolean end = false;
-			while(!end)
-			{
-				//istanza dei buffer di input e output per la comunicazione client/server
+
+			//istanza dei buffer di input e output per la comunicazione client/server
 				outBuffer = new ObjectOutputStream (clientSocket.getOutputStream());	
 				inBuffer = new ObjectInputStream(clientSocket.getInputStream());
+			
+			while(!end)
+			{
 				
 				//in attesa di un messaggio dal client (con stampa su server GUI)
 				sk.AddMsgTerminal("	[Server-Th]: attesa messaggio dal client..." );
@@ -62,7 +64,7 @@ public class ServerThread extends Thread {
 						//se il login ha successo allora viene registrato l'utente nell'hash map
 						if (result==2) {
 							map_sem.acquire();
-							map.put(usr,clientSocket);
+							map.put(usr,outBuffer);
 							map_sem.release();
 						//altrimenti viene chiusa la connessione con il client
 						}else{
@@ -86,11 +88,10 @@ public class ServerThread extends Thread {
 						String receive = sk.SendMsg(msg);
 						
 						map_sem.acquire();
-						Socket receiveSkt = map.get(receive);
+						ObjectOutputStream oos = map.get(receive);
 						map_sem.release();
 
 						//invio messaggio al client receiver
-						ObjectOutputStream oos = new ObjectOutputStream(receiveSkt.getOutputStream()); //TO BE FOUND
 						Document msgPktOut = msgBuilder.createMsgXMLObj(msg); //TO BE FOUND
 						oos.writeObject(msgPktOut);
 						
@@ -100,7 +101,14 @@ public class ServerThread extends Thread {
 
 						break;
 					}	
-					case "loadContacts":{
+					case "ContactRequest":{
+						
+						//invio dei contatti al client che li richiede 	
+						String usr = msgPkt.getElementsByTagName("user").item(0).getTextContent();
+						NodeList contacts = sk.LoadContacts(usr);
+						Document contactsPkt = msgBuilder.createContactsXMLObj(contacts);
+						outBuffer.writeObject(contactsPkt);
+
 						break;
 					}	
 				}

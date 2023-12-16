@@ -83,6 +83,21 @@ public class ChatClientThread extends Thread{
                         
                         break;
                     }
+                    //,,,
+                    case "ContactsLoading":{
+                        //..
+                        ArrayList<String> contacts = new ArrayList<String>();
+                        NodeList contactsList = pkt.getElementsByTagName("user");
+                        for(int i=0;i<contactsList.getLength();i++){
+
+                            String contact = contactsList.item(i).getAttributes().getNamedItem("nickName").getTextContent();
+                            contacts.add(contact);
+                        }
+
+                        clientInterface.getLoadingContacts(contacts);
+                        
+                        break;
+                    }
 
                 }
             }
