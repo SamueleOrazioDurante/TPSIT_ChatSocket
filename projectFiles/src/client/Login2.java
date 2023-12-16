@@ -6,6 +6,11 @@ package client;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JFrame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.awt.Image;
+import javax.imageio.ImageIO;
 /**
  *
  * @author matt3
@@ -41,6 +46,7 @@ public class Login2 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("png/logo/logo.jpeg"));
         setIconImages(null);
 
         jPanel2.setBackground(new java.awt.Color(18, 18, 18));
@@ -180,9 +186,6 @@ public class Login2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private client.style.LoginButton loginButton2;
