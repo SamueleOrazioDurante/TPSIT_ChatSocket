@@ -1,6 +1,8 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "c:\\Users\\matt3\\Downloads\\gradient-icon-font.jar",
+        "c:\\Users\\matt3\\Downloads\\TimingFramework-0.55.jar"
     ],
     "java.project.sourcePaths": [
         "projectFiles/src",

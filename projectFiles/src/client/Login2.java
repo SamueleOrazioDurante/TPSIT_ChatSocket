@@ -31,6 +31,8 @@ public class Login2 extends javax.swing.JFrame {
         centrareJFrame();
         setIconaImage();
         titleBar1.init(this);
+        enable_eye.setVisible(false);
+        enable_eye.setEnabled(false);
     }
 
     /**
@@ -52,8 +54,8 @@ public class Login2 extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        disabile_eye = new javax.swing.JLabel();
         enable_eye = new javax.swing.JLabel();
+        disabile_eye = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         titleBar1 = new client.style.TitleBar();
@@ -97,20 +99,20 @@ public class Login2 extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\human.png")); // NOI18N
 
-        disabile_eye.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        disabile_eye.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\open_eye.png")); // NOI18N
-        disabile_eye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        disabile_eye.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                disabile_eyeMouseClicked(evt);
-            }
-        });
-
-        enable_eye.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\closed_eye.png")); // NOI18N
+        enable_eye.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        enable_eye.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\open_eye.png")); // NOI18N
         enable_eye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         enable_eye.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 enable_eyeMouseClicked(evt);
+            }
+        });
+
+        disabile_eye.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\png\\icon\\login\\closed_eye.png")); // NOI18N
+        disabile_eye.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        disabile_eye.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                disabile_eyeMouseClicked(evt);
             }
         });
 
@@ -135,8 +137,8 @@ public class Login2 extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(loginButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(disabile_eye)
-                                .addComponent(enable_eye)))))
+                                .addComponent(enable_eye)
+                                .addComponent(disabile_eye)))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -158,8 +160,8 @@ public class Login2 extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(disabile_eye)
-                    .addComponent(enable_eye))
+                    .addComponent(enable_eye)
+                    .addComponent(disabile_eye))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -240,21 +242,24 @@ public class Login2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    private void disabile_eyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disabile_eyeMouseClicked
-        jPasswordField1.setEchoChar((char)0);
-        disabile_eye.setVisible(false);
-        disabile_eye.setEnabled(false);
-        enable_eye.setVisible(true);
-        enable_eye.setEnabled(true);
-    }//GEN-LAST:event_disabile_eyeMouseClicked
-
     private void enable_eyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enable_eyeMouseClicked
         jPasswordField1.setEchoChar((char)8226);
         disabile_eye.setVisible(true);
         disabile_eye.setEnabled(true);
         enable_eye.setVisible(false);
         enable_eye.setEnabled(false);
+
     }//GEN-LAST:event_enable_eyeMouseClicked
+
+    private void disabile_eyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disabile_eyeMouseClicked
+        jPasswordField1.setEchoChar((char)0);
+        
+        
+        disabile_eye.setVisible(false);
+        disabile_eye.setEnabled(false);
+        enable_eye.setVisible(true);
+        enable_eye.setEnabled(true);
+    }//GEN-LAST:event_disabile_eyeMouseClicked
 
     /**
      * @param args the command line arguments
