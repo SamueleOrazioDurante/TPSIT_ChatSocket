@@ -39,7 +39,8 @@ public class DBManager {
     private final int UserDuplicated = 0;
     private final int SignUpChecked = 1;
 
-    protected static final String XML_FILE_PATH = "src/server/dbChat.xml";
+    protected static final String XML_FILE_PATH = "server\\resources\\dbChat.xml";
+    protected static final String DTD_FILE_PATH = "server\\resources\\dbChat.dtd";
     private DocumentBuilder builder;
     private File XMLFile;
 
@@ -207,7 +208,7 @@ public class DBManager {
             Transformer transformer = transformerFactory.newTransformer();
 
             //modifica proprietà per aggiungere dtd e indentazione automatica
-            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "dbChat.dtd");
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, DTD_FILE_PATH);
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
             DOMSource source = new DOMSource(document);

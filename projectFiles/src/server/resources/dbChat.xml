@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE Database SYSTEM "dbChat.dtd">
+<!DOCTYPE Database SYSTEM "server\resources\dbChat.dtd">
 <Database>
     <UserList>
         <user username="Bersanella">
@@ -13,6 +13,9 @@
         </user>
         <user username="Matteo">
             <password>1234</password>
+        </user>
+        <user username="Test1">
+            <password>Test1</password>
         </user>
     </UserList>
     <ChatList>
