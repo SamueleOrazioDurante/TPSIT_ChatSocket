@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.Image;
@@ -22,6 +25,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author matt3
  */
 public class Signup extends javax.swing.JFrame {
+
+    //variabili della classe signup
+    ChatClientProxy proxy;
 
     /**
      * Creates new form Signup
@@ -271,11 +277,25 @@ public class Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_disabile_eyeMouseClicked
 
     private void regBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regBtnMouseClicked
-        // TODO add your handling code here:
+            // creazione nuovo proxy
+            proxy = new ChatClientProxy();
+            //utilizzo funzione login
+            int logResult = proxy.signUp(usrField.getText(),new String(pswField.getPassword()));
+
+            //se il login è eseguito con successo, passo username
+            if(logResult == 1){
+                //nascondo la pagina di signUp
+                new Login().setVisible(true);
+                Signup.this.setVisible(false);
+
+            }else{
+                JOptionPane.showMessageDialog(null,"Username già utilizzato");
+            }
     }//GEN-LAST:event_regBtnMouseClicked
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        // TODO add your handling code here:
+        new Login().setVisible(true);
+        Signup.this.setVisible(false);
     }//GEN-LAST:event_loginBtnMouseClicked
 
     /**
@@ -316,7 +336,7 @@ public class Signup extends javax.swing.JFrame {
     }
 
     public void setIconaImage() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(("png/logo/logo-nobg-insidebg-64x64.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(("src/png/logo/logo-nobg-insidebg-64x64.png")));
         setTitle("Ketu");
     }
 

@@ -10,16 +10,19 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import client.LoggedIndex;
+
 import interfaces.ChatFeat;
 import interfaces.XMLMsgBuilder;
-import interfaces.ClientBLInterface;
 
 public class ChatClientProxy implements ChatFeat{
 
     private Socket skt;
-    private ClientBLInterface clientInterface;
+    private LoggedIndex clientInterface;
     private XMLMsgBuilder msgBuilder;
     private ChatClientThread clientThread;
+    private ObjectOutputStream oos;
+    private ObjectInputStream ois;
     
     //proxy si occupa solo della parte di comunicazione
     public ChatClientProxy(){
@@ -29,6 +32,11 @@ public class ChatClientProxy implements ChatFeat{
             clientInterface = null;
             msgBuilder = new XMLMsgBuilder();
             clientThread = null;
+            
+            //apertura canali di comunicazione in/out
+            oos = new ObjectOutputStream(skt.getOutputStream());
+            ois = new ObjectInputStream(skt.getInputStream());
+
         }catch(UnknownHostException e){
             e.printStackTrace();
         }catch(IOException e){
@@ -41,13 +49,12 @@ public class ChatClientProxy implements ChatFeat{
     public int login(String usr, String psw){
         int logResult = 0;
         try{
-            //apertura canali di comunicazione in/out
-            ObjectOutputStream oos = new ObjectOutputStream(skt.getOutputStream());
-            ObjectInputStream ois = new ObjectInputStream(skt.getInputStream());
 
             //creazione pacchetto con metodi del message builder
             Document pkt = msgBuilder.createLoginXMLObj(usr, psw);
             oos.writeObject(pkt);
+
+            logResult = (int)ois.readObject();
 
             //se il login ha successo chiudo la comunicazione
             if(logResult==2){
@@ -55,7 +62,32 @@ public class ChatClientProxy implements ChatFeat{
                 oos.close();
                 ois.close();
             }
-        }catch(IOException e){
+        }catch(IOException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return logResult;
+    }
+
+    @Override
+    //metodo per
+    public int signUp(String usr, String psw){
+        int logResult = 0;
+        try{
+
+            //creazione pacchetto con metodi del message builder
+            Document pkt = msgBuilder.createSignUpXMLObj(usr, psw);
+            oos.writeObject(pkt);
+
+            logResult = (int)ois.readObject();
+            
+            //se la registrazione ha successo chiudo la comunicazione
+            if(logResult==1){
+                skt.close();
+                oos.close();
+                ois.close();
+            }
+        }catch(IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
 
@@ -63,9 +95,10 @@ public class ChatClientProxy implements ChatFeat{
     }
 
     //metodo per creare il nuovo thread che gestirá
-    public void newClientThread(ClientBLInterface clientInterface){
+    public void newClientThread(LoggedIndex clientInterface){
         //ci = clientInterface;
-        clientThread = new ChatClientThread(skt,clientInterface);
+        //passo ois perchè il thread deve solo leggere
+        clientThread = new ChatClientThread(ois,clientInterface);
         clientThread.start();
     }
 

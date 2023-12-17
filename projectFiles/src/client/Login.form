@@ -111,7 +111,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="loginButton3" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="regBtn" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                       <Component id="enable_eye" min="-2" max="-2" attributes="0"/>
                                       <Component id="disabile_eye" min="-2" max="-2" attributes="0"/>
@@ -161,7 +161,7 @@
                       <EmptySpace pref="75" max="32767" attributes="0"/>
                       <Component id="notRegTxt" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="loginButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="regBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -201,10 +201,13 @@
                 <Property name="text" type="java.lang.String" value="Password"/>
               </Properties>
             </Component>
-            <Component class="client.style.LoginButton" name="loginButton3">
+            <Component class="client.style.LoginButton" name="regBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="REGISTRATI"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="regBtnMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="notRegTxt">
               <Properties>

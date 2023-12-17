@@ -1,8 +1,9 @@
-<!ELEMENT chat_db (user_list,ChatList)>
-<!ELEMENT user_list (user*)>
+<!ELEMENT chat_db (UserList,ChatList)>
+<!ELEMENT UserList (user*)>
 <!ELEMENT ChatList (chat*)>
-<!ELEMENT user (nickName,password)>
-<!ELEMENT nickName (#PCDATA)>
+<!ELEMENT user (password)>
+<!ATTLIST user id ID #REQUIRED>
+<!ELEMENT username (#PCDATA)>
 <!ELEMENT password (#PCDATA)>
 <!ELEMENT chat (ChatMessage*)>
 <!ATTLIST chat id ID #REQUIRED>

@@ -59,6 +59,12 @@ public class ServerSkeleton implements ChatFeat{
         return serverReale.login(usr,psw);
     }
 
+	@Override
+    //metodo da server reale
+    public int signUp(String usr,String psw){
+        return serverReale.signUp(usr,psw);
+    }
+
     @Override
     //metodo da server reale
     public NodeList LoadChat(String usr_a,String usr_b){

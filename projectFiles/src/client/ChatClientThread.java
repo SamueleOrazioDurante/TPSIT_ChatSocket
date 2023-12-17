@@ -14,12 +14,14 @@ import interfaces.ClientBLInterface;
 
 public class ChatClientThread extends Thread{
     private Socket skt;
-    private ClientBLInterface clientInterface;
+    private LoggedIndex clientInterface;
     private boolean destroy;
 
+    private ObjectInputStream ois;
+
     //richiesta socket e interfaccia del client
-    public ChatClientThread(Socket skt,ClientBLInterface clientInterface){
-        this.skt = skt;
+    public ChatClientThread(ObjectInputStream ois,LoggedIndex clientInterface){
+        this.ois = ois;
         this.clientInterface = clientInterface;
         this.destroy = false;
     }
@@ -31,10 +33,6 @@ public class ChatClientThread extends Thread{
 
     public void run(){
         try{
-            //apertura canali di comunicazione in/out
-            ObjectOutputStream oos = new ObjectOutputStream(skt.getOutputStream());
-            ObjectInputStream ois = new ObjectInputStream(skt.getInputStream());
-            
             //finchè non viene distrutto dal client
             while(!destroy){
                 
@@ -44,7 +42,7 @@ public class ChatClientThread extends Thread{
 
                 //recupero l'operazione da eseguire dal pacchetto
                 String operation = pkt.getElementsByTagName("Operation").item(0).getTextContent();
-                
+                /* 
                 //si utilizza l'approccio a eventi, in base a quello che succede, dovrà accadere un determinato evento
                 switch (operation) {
                     //,,,
@@ -99,7 +97,7 @@ public class ChatClientThread extends Thread{
                         break;
                     }
 
-                }
+                }*/
             }
         }catch(ClassNotFoundException | IOException e){
             e.printStackTrace();

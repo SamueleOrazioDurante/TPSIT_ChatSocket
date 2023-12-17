@@ -16,6 +16,9 @@ public class Server implements ChatFeat{
     private final int WrongPassword = 1;
     private final int PasswordChecked = 2;
 
+    private final int UserDuplicated = 0;
+    private final int SignUpChecked = 1;
+
 	public Server(DBManager db,serverGUI gui){
         this.dbm=db;
         this.gui=gui;
@@ -31,6 +34,19 @@ public class Server implements ChatFeat{
                 return WrongPassword;
             case 2:
                 return PasswordChecked;
+            default:
+                break;
+        };
+        return result;
+    }
+
+    @Override
+    //metodo per verificare che l'utente inserisca un nome utente unico e fare la registrazione
+    public int signUp(String usr,String psw){
+        int result = UserDuplicated;
+        switch (dbm.addUserToDB(usr, psw)){
+            case 1:
+                return SignUpChecked;
             default:
                 break;
         };

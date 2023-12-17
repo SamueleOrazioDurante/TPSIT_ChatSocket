@@ -4,6 +4,12 @@ import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,8 +27,10 @@ public class DBManager {
     private final int WrongPassword = 1;
     private final int PasswordChecked = 2;
     
+    private final int UserDuplicated = 0;
+    private final int SignUpChecked = 1;
 
-    protected static final String XML_FILE_PATH = "projectFiles\\src\\server\\dbChat.xml";
+    protected static final String XML_FILE_PATH = "src\\server\\dbChat.xml";
     private DocumentBuilder builder;
     private File XMLFile;
 
@@ -47,7 +55,9 @@ public class DBManager {
     //metodo checkuser 
     public synchronized int CheckUser(String usr, String psw){
         int result = UserNotFound;
+        
         Node usersNode = db.getElementById(usr);
+        
 
         //controllo se il nodo esiste (result rimane come utente non trovato). Se esiste controllo se la password è uguale
         if(usersNode!=null){
@@ -59,6 +69,46 @@ public class DBManager {
                 //result diventa utente trovato ma non verificato
             }
         }
+        return result;
+    }
+
+    //metodo addUserToDB 
+    public synchronized int addUserToDB(String usr,String psw){
+        int result = UserDuplicated;
+        Node userNode = db.getElementById(usr);
+
+        NodeList usersList = db.getElementsByTagName("UserList");
+
+        //controllo se il nodo esiste. Se esiste controllo l'utente esiste già
+        if(userNode==null){
+            Element userList = (Element)usersList.item(0);
+            
+            Element user = db.createElement("user");
+                    user.setAttribute("id",usr);
+            Element password = db.createElement("password");
+                    password.setTextContent(psw);
+                    user.appendChild(password);
+                    userList.appendChild(user);
+            System.out.println(userList.getLastChild().getAttributes().getNamedItem("id"));
+
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer;
+            try {
+                transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(db);
+                StreamResult resultDB = new StreamResult(new File(XML_FILE_PATH));
+                transformer.transform(source, resultDB);
+
+            } catch (TransformerConfigurationException e) {
+                e.printStackTrace();
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
+
+            result=SignUpChecked;
+        }
+
         return result;
     }
 
@@ -93,6 +143,9 @@ public class DBManager {
                     chatListN.appendChild(chatN);
                 }
             }
+
+            
+
             //operazioni svolte con successo
             result = true;
 

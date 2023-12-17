@@ -43,26 +43,55 @@ public class ServerThread extends Thread {
 			{
 				
 				//in attesa di un messaggio dal client (con stampa su server GUI)
-				sk.AddMsgTerminal("	[Server-Th]: attesa messaggio dal client..." );
+				sk.AddMsgTerminal("	[Server]: attesa messaggio dal client..." );
 				Document msgPkt = (Document)inBuffer.readObject();
 
 				//switch case per ricerca tipologia di operazione
 				String op = msgPkt.getElementsByTagName("Operation").item(0).getTextContent();
 				switch (op) {
 					case "login":{
-						String usr = msgPkt.getElementsByTagName("nickname").item(0).getTextContent(); //da cambiare
+						sk.AddMsgTerminal("	[Server]: Pacchetto login ricevuto..." );
+						String usr = msgPkt.getElementsByTagName("username").item(0).getTextContent(); //da cambiare
 						String psw = msgPkt.getElementsByTagName("password").item(0).getTextContent(); //da cambiare
 						int result = sk.login(usr, psw);
 
+						sk.AddMsgTerminal("	[Server]: Tentativo di login...");
 						outBuffer.writeObject(result);
 						
 						//se il login ha successo allora viene registrato l'utente nell'hash map
 						if (result==2) {
+							sk.AddMsgTerminal("	[Server]: Login effettuato con usr: "+ usr);
 							map_sem.acquire();
 							map.put(usr,outBuffer);
 							map_sem.release();
 						//altrimenti viene chiusa la connessione con il client
 						}else{
+							sk.AddMsgTerminal("	[Server]: Login fallito con errore n."+result);
+							clientSocket.close();
+							inBuffer.close();
+							outBuffer.close();
+							end=true;
+						}
+						break;
+					}
+					case "signUp":{
+						sk.AddMsgTerminal("	[Server]: Pacchetto registrazione ricevuto..." );
+						String usr = msgPkt.getElementsByTagName("username").item(0).getTextContent(); //da cambiare
+						String psw = msgPkt.getElementsByTagName("password").item(0).getTextContent(); //da cambiare
+						int result = sk.signUp(usr, psw);
+
+						sk.AddMsgTerminal("	[Server]: Tentativo di registrazione...");
+						outBuffer.writeObject(result);
+						
+						//se il login ha successo allora viene registrato l'utente nell'hash map
+						if (result==1) {
+							sk.AddMsgTerminal("	[Server]: Registrazione effettuato con usr: "+ usr);
+							map_sem.acquire();
+							map.put(usr,outBuffer);
+							map_sem.release();
+						//altrimenti viene chiusa la connessione con il client
+						}else{
+							sk.AddMsgTerminal("	[Server]: Registrazione fallita : "+usr);
 							clientSocket.close();
 							inBuffer.close();
 							outBuffer.close();

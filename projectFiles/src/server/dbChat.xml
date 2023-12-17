@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE chat_db SYSTEM "dbChat.dtd">
 <chat_db>
-    <user_list>
-        <user>
-            <nickName>SamOraDur</nickName>
-            <password>Ciao123!</password>
+    <UserList>
+        <user id="patata">
+            <password>1</password>
         </user>
-        <user>
-            <nickName>RobMaMingo</nickName>
-            <password>Enacoid</password>
+        <user id="sfdfdsfdsfds">
+            <password>fsd</password>
         </user>
-    </user_list>
+        <user id="Magnani">
+            <password>Matteo</password>
+        </user>
+        <user id="ciao">
+            <password>ciao</password>
+        </user>
+        <user id="12">
+            <password>1</password>
+        </user>
+    </UserList>
     <ChatList>
         <chat id="SamOraDur-RobMaMingo">
             <ChatMessage>

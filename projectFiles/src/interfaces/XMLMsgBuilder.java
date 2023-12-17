@@ -29,7 +29,7 @@ public class XMLMsgBuilder {
         }
     }
 
-    //metodo creazione paccheto login
+    //metodo creazione pacchetto login
     public Document createLoginXMLObj(String usr,String psw){
         //creazione documento e elemento radice
         Document doc = docBuild.newDocument();
@@ -38,15 +38,42 @@ public class XMLMsgBuilder {
 
         //crezione dell'elemento Operation che contiene l'operazione che si sta svolgendo
         Element e = doc.createElement("Operation");
-        e.setTextContent("Login");
+        e.setTextContent("login");
         rootElement.appendChild(e);
 
        //elemento username 
-        e.setTextContent("username");
+        e = doc.createElement("username");
+        e.setTextContent(usr);
         rootElement.appendChild(e);
 
         //elemento password
-        e.setTextContent("oassword");
+        e = doc.createElement("password");
+        e.setTextContent(psw);
+        rootElement.appendChild(e);
+        
+        return doc;
+    }
+
+    //metodo creazione pacchetto signup
+    public Document createSignUpXMLObj(String usr,String psw){
+        //creazione documento e elemento radice
+        Document doc = docBuild.newDocument();
+        Element rootElement = doc.createElement("XMLPkt");
+        doc.appendChild(rootElement);
+
+        //crezione dell'elemento Operation che contiene l'operazione che si sta svolgendo
+        Element e = doc.createElement("Operation");
+        e.setTextContent("signUp");
+        rootElement.appendChild(e);
+
+       //elemento username 
+        e = doc.createElement("username");
+        e.setTextContent(usr);
+        rootElement.appendChild(e);
+
+        //elemento password
+        e = doc.createElement("password");
+        e.setTextContent(psw);
         rootElement.appendChild(e);
         
         return doc;

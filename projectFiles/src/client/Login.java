@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.Image;
@@ -22,6 +25,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author matt3
  */
 public class Login extends javax.swing.JFrame {
+
+    //variabili della classe login
+    ChatClientProxy proxy;
 
     /**
      * Creates new form Login2
@@ -49,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         usrTxt = new javax.swing.JLabel();
         loginBtn = new client.style.LoginButton();
         pswTxt = new javax.swing.JLabel();
-        loginButton3 = new client.style.LoginButton();
+        regBtn = new client.style.LoginButton();
         notRegTxt = new javax.swing.JLabel();
         usrField = new javax.swing.JTextField();
         pswField = new javax.swing.JPasswordField();
@@ -84,7 +90,12 @@ public class Login extends javax.swing.JFrame {
         pswTxt.setForeground(new java.awt.Color(227, 227, 227));
         pswTxt.setText("Password");
 
-        loginButton3.setText("REGISTRATI");
+        regBtn.setText("REGISTRATI");
+        regBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                regBtnMouseClicked(evt);
+            }
+        });
 
         notRegTxt.setForeground(new java.awt.Color(227, 227, 227));
         notRegTxt.setText("Non sei ancora registrato?");
@@ -135,7 +146,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginFormLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(loginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(loginButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(enable_eye)
                                 .addComponent(disabile_eye))))
@@ -172,7 +183,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(notRegTxt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loginButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(regBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(loginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(loginFormLayout.createSequentialGroup()
@@ -269,8 +280,33 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_disabile_eyeMouseClicked
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        // TODO add your handling code here:
+
+        // creazione nuovo proxy
+        proxy = new ChatClientProxy();
+        //utilizzo funzione login
+        int logResult = proxy.login(usrField.getText(),new String(pswField.getPassword()));
+
+        //se il login è eseguito con successo, passo username
+        if(logResult == 2){
+
+            LoggedIndex li = new LoggedIndex(usrField.getText());
+            //metodo per istanziare un nuovo thread a cui passo un istanza del logged index
+            proxy.newClientThread(li);
+            //mostro la pagina della chat vera e propria
+            li.setVisible(true);
+            //nascondo la pagina di login
+            Login.this.setVisible(false);
+
+        }else{
+            JOptionPane.showMessageDialog(null,"Username o password errati");
+        }
+
     }//GEN-LAST:event_loginBtnMouseClicked
+
+    private void regBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regBtnMouseClicked
+        new Signup().setVisible(true);
+        Login.this.setVisible(false);
+    }//GEN-LAST:event_regBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -336,11 +372,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel imageLogo;
     private javax.swing.JLabel imgLogo;
     private client.style.LoginButton loginBtn;
-    private client.style.LoginButton loginButton3;
     private javax.swing.JPanel loginForm;
     private javax.swing.JLabel notRegTxt;
     private javax.swing.JPasswordField pswField;
     private javax.swing.JLabel pswTxt;
+    private client.style.LoginButton regBtn;
     private javax.swing.JPanel rootElement;
     private client.style.TitleBar titleBar;
     private javax.swing.JTextField usrField;

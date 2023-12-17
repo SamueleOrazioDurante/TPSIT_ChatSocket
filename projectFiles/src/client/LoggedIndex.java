@@ -29,11 +29,14 @@ public class LoggedIndex extends javax.swing.JFrame {
      private int SingleLineMessageHeight = 18;
      private final int ContactHeight = 50;
      private final int ContactWidth = 170;
+    private String usr;
+
     /**
      * Creates new form LoggedIndex
      */
-    public LoggedIndex() {
+    public LoggedIndex(String usr) {
         initComponents();
+        this.usr=usr;
         
         InitArrayList();
     }
