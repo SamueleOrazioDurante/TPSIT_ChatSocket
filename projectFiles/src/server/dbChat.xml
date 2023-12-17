@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<chat_db>
+<Database>
     <UserList>
-        <user id="patata">
-            <password>1</password>
-        </user>
-        <user id="sfdfdsfdsfds">
-            <password>fsd</password>
-        </user>
-        <user id="Magnani">
-            <password>Matteo</password>
-        </user>
-        <user id="ciao">
-            <password>ciao</password>
-        </user>
-        <user id="12">
-            <password>1</password>
+        <user username="Bersanella">
+            <password>1234</password>
         </user>
     </UserList>
     <ChatList>
@@ -26,4 +14,4 @@
             </ChatMessage>
         </chat>
     </ChatList>
-</chat_db>
+</Database>

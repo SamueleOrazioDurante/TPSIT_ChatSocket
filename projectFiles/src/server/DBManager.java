@@ -30,7 +30,7 @@ public class DBManager {
     private final int UserDuplicated = 0;
     private final int SignUpChecked = 1;
 
-    protected static final String XML_FILE_PATH = "src\\server\\dbChat.xml";
+    protected static final String XML_FILE_PATH = "src/server/dbChat.xml";
     private DocumentBuilder builder;
     private File XMLFile;
 
@@ -55,12 +55,12 @@ public class DBManager {
     //metodo checkuser 
     public synchronized int CheckUser(String usr, String psw){
         int result = UserNotFound;
-        
         Node usersNode = db.getElementById(usr);
         
-
+        System.out.println("sdadas1");
         //controllo se il nodo esiste (result rimane come utente non trovato). Se esiste controllo se la password è uguale
         if(usersNode!=null){
+            System.out.println("sdadas2");
             if(usersNode.getFirstChild().getTextContent().equals(psw)){
                 result = PasswordChecked; 
                 //result diventa utente trovato e verificato
@@ -75,6 +75,7 @@ public class DBManager {
     //metodo addUserToDB 
     public synchronized int addUserToDB(String usr,String psw){
         int result = UserDuplicated;
+
         Node userNode = db.getElementById(usr);
 
         NodeList usersList = db.getElementsByTagName("UserList");
@@ -84,12 +85,13 @@ public class DBManager {
             Element userList = (Element)usersList.item(0);
             
             Element user = db.createElement("user");
-                    user.setAttribute("id",usr);
+                    user.setAttribute("username",usr);
             Element password = db.createElement("password");
                     password.setTextContent(psw);
                     user.appendChild(password);
                     userList.appendChild(user);
-            System.out.println(userList.getLastChild().getAttributes().getNamedItem("id"));
+                    
+                    user.setIdAttribute("username", true);
 
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -97,8 +99,11 @@ public class DBManager {
             try {
                 transformer = transformerFactory.newTransformer();
                 DOMSource source = new DOMSource(db);
+                removeWhitespaces(db.getDocumentElement());
                 StreamResult resultDB = new StreamResult(new File(XML_FILE_PATH));
                 transformer.transform(source, resultDB);
+
+                
 
             } catch (TransformerConfigurationException e) {
                 e.printStackTrace();
@@ -155,7 +160,7 @@ public class DBManager {
 
         return result;
     }
-        //metodo per raccogliore dati (messaggi) dal database
+        //metodo per raccogliere dati (messaggi) dal database
 
         public synchronized NodeList GetDSInfo(String usr_a,String usr_b){
             NodeList chatMsg = null;
