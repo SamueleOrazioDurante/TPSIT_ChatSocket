@@ -39,7 +39,7 @@ Phasellus tristique id arcu ut tincidunt. Nulla tempor ornare lacus at suscipit.
 
 ## ✍️ Documentazione
 
-- [Presentazione](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/documentation/presentazione.pttx)
+- [Presentazione](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/documentation/presentazione.pptx)
 
 
 
