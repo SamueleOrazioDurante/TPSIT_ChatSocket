@@ -21,12 +21,12 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author matt3
  */
-public class Login2 extends javax.swing.JFrame {
+public class Signup2 extends javax.swing.JFrame {
 
     /**
      * Creates new form Login2
      */
-    public Login2() {
+    public Signup2() {
         initComponents();
         centrareJFrame();
         setIconaImage();
@@ -82,7 +82,7 @@ public class Login2 extends javax.swing.JFrame {
         loginButton3.setText("REGISTRATI");
 
         jLabel7.setForeground(new java.awt.Color(227, 227, 227));
-        jLabel7.setText("Non sei ancora registrato?");
+        jLabel7.setText("Sei già registrato?");
 
         jTextField2.setBackground(new java.awt.Color(18, 18, 18));
         jTextField2.setForeground(new java.awt.Color(225, 225, 225));
@@ -130,14 +130,13 @@ public class Login2 extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(loginButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(enable_eye)
-                                .addComponent(disabile_eye))))
+                            .addComponent(enable_eye)
+                            .addComponent(disabile_eye)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel4)
+                            .addComponent(loginButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(loginButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -163,11 +162,11 @@ public class Login2 extends javax.swing.JFrame {
                     .addComponent(enable_eye)
                     .addComponent(disabile_eye))
                 .addGap(18, 18, 18)
-                .addComponent(loginButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loginButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
