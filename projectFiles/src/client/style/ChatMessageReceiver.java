@@ -8,12 +8,12 @@ package client.style;
  *
  * @author matt3
  */
-public class ChatMessage extends javax.swing.JPanel {
+public class ChatMessageReceiver extends javax.swing.JPanel {
 
     /**
      * Creates new form ItemPeople
      */
-    public ChatMessage() {
+    public ChatMessageReceiver() {
         initComponents();
     }
     
