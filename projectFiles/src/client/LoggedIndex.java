@@ -217,7 +217,7 @@ public class LoggedIndex extends javax.swing.JFrame {
         // TODO add your handling code here:
         String sMessage = jTextAreaInputChat.getText();
         if(sMessage.length()!=0)
-            AddChatText(sMessage, LocalUser);
+        AddChatText(sMessage, LocalUser);
     }//GEN-LAST:event_jButtonSendMouseClicked
 
     /**
