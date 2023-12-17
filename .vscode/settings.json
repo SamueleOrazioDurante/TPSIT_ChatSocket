@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "projectFiles/lib/gradient-icon-font.jar",
+        "projectFiles/lib/TimingFramework-0.55.jar"
+    ]
+}
