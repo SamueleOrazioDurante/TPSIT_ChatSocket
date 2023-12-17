@@ -20,6 +20,8 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import client.LoggedIndex;
+
 /**
  *
  * @author matt3

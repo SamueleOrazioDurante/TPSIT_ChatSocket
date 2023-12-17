@@ -1,21 +1,30 @@
 package server;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public class DBManager {
     
@@ -34,17 +43,15 @@ public class DBManager {
     private DocumentBuilder builder;
     private File XMLFile;
 
-    // costruttore
+     // costruttore
     public DBManager(){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
+    
         try{
             builder = factory.newDocumentBuilder();
             XMLFile = new File(XML_FILE_PATH);
 
-            //FORSE NECESSITA SEMAFORO
             db = builder.parse(XMLFile);
-            //IFD
             
             removeWhitespaces(db.getDocumentElement());
         }catch(Exception e){
@@ -93,23 +100,11 @@ public class DBManager {
                     
                     user.setIdAttribute("username", true);
 
-            // write the content into xml file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer;
-            try {
-                transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(db);
-                removeWhitespaces(db.getDocumentElement());
-                StreamResult resultDB = new StreamResult(new File(XML_FILE_PATH));
-                transformer.transform(source, resultDB);
-
-                
-
-            } catch (TransformerConfigurationException e) {
-                e.printStackTrace();
-            } catch (TransformerException e) {
-                e.printStackTrace();
-            }
+                    try {
+                        saveXmlDocument(db,XML_FILE_PATH);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
             result=SignUpChecked;
         }
@@ -204,5 +199,19 @@ public class DBManager {
         public synchronized NodeList GetContacts(String usr){
             NodeList contacts = db.getElementsByTagName("user");
             return contacts;
+        }
+
+        private synchronized static void saveXmlDocument(Document document, String filePath) throws Exception {
+            // Salva il documento XML aggiornato
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+
+            //modifica proprietà per aggiungere dtd e indentazione automatica
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "dbChat.dtd");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File(filePath));
+            transformer.transform(source, result);
         }
 }

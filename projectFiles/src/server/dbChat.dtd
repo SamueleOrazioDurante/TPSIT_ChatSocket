@@ -1,4 +1,4 @@
-<!ELEMENT Database (UserList,ChatList)>
+<!ELEMENT Database (UserList, ChatList)>
 <!ELEMENT UserList (user*)>
 <!ELEMENT ChatList (chat*)>
 <!ELEMENT user (password)>
@@ -6,7 +6,7 @@
 <!ELEMENT password (#PCDATA)>
 <!ELEMENT chat (ChatMessage*)>
 <!ATTLIST chat id ID #REQUIRED>
-<!ELEMENT ChatMessage (Content,Sender,Receiver)>
+<!ELEMENT ChatMessage (Content, Sender, Receiver)>
 <!ELEMENT Content (#PCDATA)>
 <!ELEMENT Sender (#PCDATA)>
 <!ELEMENT Receiver (#PCDATA)>

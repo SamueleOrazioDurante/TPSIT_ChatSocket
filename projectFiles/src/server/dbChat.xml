@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Database SYSTEM "dbChat.dtd">
 <Database>
     <UserList>
         <user username="Bersanella">
+            <password>1234</password>
+        </user>
+        <user username="Ciao">
+            <password>Ciao</password>
+        </user>
+        <user username="dfssdf">
+            <password>fsdfds</password>
+        </user>
+        <user username="Matteo">
             <password>1234</password>
         </user>
     </UserList>
