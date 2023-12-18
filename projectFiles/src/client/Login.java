@@ -291,7 +291,7 @@ public class Login extends javax.swing.JFrame {
         //se il login è eseguito con successo, passo username
         if(logResult == 2){
 
-            LoggedIndex li = new LoggedIndex(usrField.getText());
+            LoggedIndex li = new LoggedIndex(usrField.getText(),proxy);
             //metodo per istanziare un nuovo thread a cui passo un istanza del logged index
             proxy.newClientThread(li);
             //mostro la pagina della chat vera e propria

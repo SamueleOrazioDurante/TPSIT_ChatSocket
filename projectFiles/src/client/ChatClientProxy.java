@@ -56,8 +56,8 @@ public class ChatClientProxy implements ChatFeat{
 
             logResult = (int)ois.readObject();
 
-            //se il login ha successo chiudo la comunicazione
-            if(logResult==2){
+            //se il login non ha successo chiudo la comunicazione
+            if(logResult!=2){
                 skt.close();
                 oos.close();
                 ois.close();
@@ -80,7 +80,6 @@ public class ChatClientProxy implements ChatFeat{
             oos.writeObject(pkt);
 
             logResult = (int)ois.readObject();
-            
             //se la registrazione ha successo chiudo la comunicazione
             if(logResult==1){
                 skt.close();
@@ -98,6 +97,7 @@ public class ChatClientProxy implements ChatFeat{
     public void newClientThread(LoggedIndex clientInterface){
         //ci = clientInterface;
         //passo ois perchè il thread deve solo leggere
+
         clientThread = new ChatClientThread(ois,clientInterface);
         clientThread.start();
     }
@@ -110,9 +110,16 @@ public class ChatClientProxy implements ChatFeat{
     @Override
     //metodo
     public NodeList LoadChat(String usr_a,String usr_b){
-        //TDB
-        NodeList TDB = null;
-        return TDB;
+        try{
+
+            //creazione pacchetto con metodi del message builder
+            Document pkt = msgBuilder.createLoadChatRequestXMLObj(usr_a, usr_b);
+            oos.writeObject(pkt);
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -123,14 +130,24 @@ public class ChatClientProxy implements ChatFeat{
         return TDB;
     }
 
+    public String SendMsgToServer(Message msg){
+        try{
+            //creazione pacchetto con metodi del message builder
+            Document pkt = msgBuilder.createMsgXMLObj(msg);
+            oos.writeObject(pkt);   
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
     @Override
     //metodo
     public NodeList LoadContacts(String usr){
         
         try {
-
-            //apertura canale di comunicazione out
-            ObjectOutputStream oos = new ObjectOutputStream(skt.getOutputStream());
 
             //manda il pacchetto con la richiesta degli utenti al server
             Document pkt = msgBuilder.createLoadContactRequestXMLObj(usr);

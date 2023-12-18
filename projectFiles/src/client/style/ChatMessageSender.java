@@ -9,11 +9,12 @@ package client.style;
  * @author matt3
  */
 public class ChatMessageSender extends javax.swing.JPanel {
-
+        String text;
     /**
      * Creates new form ItemPeople
      */
-    public ChatMessageSender() {
+    public ChatMessageSender(String txt) {
+        this.text = txt;
         initComponents();
     }
     
@@ -37,7 +38,7 @@ public class ChatMessageSender extends javax.swing.JPanel {
         jLabel2.setBackground(new java.awt.Color(241, 241, 241));
         jLabel2.setForeground(new java.awt.Color(31, 31, 31));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("User");
+        jLabel2.setText(text);
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

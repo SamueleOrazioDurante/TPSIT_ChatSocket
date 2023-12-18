@@ -8,17 +8,26 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.awt.Image;
 import javax.imageio.ImageIO;
+import javax.sql.ConnectionPoolDataSource;
 import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import client.style.ChatMessageReceiver;
+import client.style.ChatMessageSender;
 import client.style.ItemPeople;
+import client.style.ScrollPaneWin11;
 
 /**
  *
@@ -28,27 +37,52 @@ public class LoggedIndex extends javax.swing.JFrame {
 
     //variabili della classe LoggedIndex
     String localuser = "UserNotFound";  //utilizzata nel caso il programma venga aperto in modo non corretto 
+    String remoteuser;
+
+    ChatClientProxy proxy;
     
     //arraylist -> database locale
-    ArrayList<String> Contacts = new ArrayList<String>(); //arraylist di contatti
-    ArrayList<ArrayList<Message>> MsgsContacts = new ArrayList<ArrayList<Message>>(); // arraylist di arraylist di messaggi (uno per utente)
-    ArrayList<ItemPeople> ContactsBtn = new ArrayList<ItemPeople>(); //arraylist dei vari bottoni che permette di accedere alle varie chat
+    ArrayList<String> Contacts; //arraylist di contatti
+    ArrayList<ArrayList<Message>> MsgsContacts; // arraylist di arraylist di messaggi (uno per utente)
+    ArrayList<ItemPeople> ContactsBtn; //arraylist dei vari bottoni che permette di accedere alle varie chat
 
     //altre variabili per la gestione della stampa a video di contatti e messaggi
-    
+    private int fixedMessageYOffset = 25;
+    private int YLastMessage = 0;
+    private final int MaxMessageWidth = 170;
+    private final int RemoteSenderStartOffsetMessage = 200;
+    private final int LocalSenderStartOffsetMessage = 0;
+    private int SingleLineMessageHeight = 18;
+    private final int ContactHeight = 50;
+    private final int ContactWidth = 170;
     
     
     /**
      * Creates new form Login2
      */
-    public LoggedIndex(String localuser) {
+    public LoggedIndex(String usr,ChatClientProxy prx) {
         initComponents();
+
+        //componenti grafiche
         centrareJFrame();
         setIconaImage();
         titleBar1.init(this);
-        this.localuser=localuser;
+
+        initVar(usr,prx);    
+
+    }
+
+    private void initVar(String usr,ChatClientProxy prx){
+        this.localuser=usr;
         ciao_user.setText("Ciao "+localuser);
 
+        this.proxy = prx;
+
+        Contacts = new ArrayList<String>();
+        MsgsContacts = new ArrayList<ArrayList<Message>>();
+        ContactsBtn = new ArrayList<ItemPeople>();
+
+        proxy.LoadContacts(localuser);
     }
 
     /**
@@ -69,14 +103,8 @@ public class LoggedIndex extends javax.swing.JFrame {
         messaggio_field = new javax.swing.JTextField();
         invia_icon = new javax.swing.JLabel();
         scrollPane = new client.style.ScrollPaneWin11();
-        jPanel3 = new javax.swing.JPanel();
-        itemPeople1 = new client.style.ItemPeople();
-        itemPeople2 = new client.style.ItemPeople();
+        userList = new javax.swing.JPanel();
         allChat = new javax.swing.JPanel();
-        chatLayer = new javax.swing.JLayeredPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        chatMessageSender1 = new client.style.ChatMessageSender();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -96,7 +124,7 @@ public class LoggedIndex extends javax.swing.JFrame {
         icon_user.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/icon/login/human.png"))); // NOI18N
 
         ciao_user.setForeground(new java.awt.Color(241, 241, 241));
-        ciao_user.setText("Ciao "+localuser);
+        ciao_user.setText("Ciao UserNotFound");
 
         javax.swing.GroupLayout panel_userLayout = new javax.swing.GroupLayout(panel_user);
         panel_user.setLayout(panel_userLayout);
@@ -108,9 +136,9 @@ public class LoggedIndex extends javax.swing.JFrame {
                     .addGroup(panel_userLayout.createSequentialGroup()
                         .addComponent(icon_user)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ciao_user))
+                        .addComponent(ciao_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(ketu_logo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panel_userLayout.setVerticalGroup(
             panel_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,81 +165,32 @@ public class LoggedIndex extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(43, 43, 43));
+        userList.setBackground(new java.awt.Color(43, 43, 43));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(itemPeople1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(itemPeople2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout userListLayout = new javax.swing.GroupLayout(userList);
+        userList.setLayout(userListLayout);
+        userListLayout.setHorizontalGroup(
+            userListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(itemPeople1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemPeople2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(594, Short.MAX_VALUE))
+        userListLayout.setVerticalGroup(
+            userListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 690, Short.MAX_VALUE)
         );
 
-        scrollPane.setViewportView(jPanel3);
+        scrollPane.setViewportView(userList);
 
         allChat.setBackground(new java.awt.Color(43, 43, 43));
-
-        javax.swing.GroupLayout chatLayerLayout = new javax.swing.GroupLayout(chatLayer);
-        chatLayer.setLayout(chatLayerLayout);
-        chatLayerLayout.setHorizontalGroup(
-            chatLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        chatLayerLayout.setVerticalGroup(
-            chatLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(chatMessageSender1);
 
         javax.swing.GroupLayout allChatLayout = new javax.swing.GroupLayout(allChat);
         allChat.setLayout(allChatLayout);
         allChatLayout.setHorizontalGroup(
             allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(allChatLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(431, Short.MAX_VALUE))
-            .addGroup(allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(allChatLayout.createSequentialGroup()
-                    .addGap(325, 325, 325)
-                    .addComponent(chatLayer)
-                    .addGap(326, 326, 326)))
-            .addGroup(allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(allChatLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGap(0, 651, Short.MAX_VALUE)
         );
         allChatLayout.setVerticalGroup(
             allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(allChatLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(756, Short.MAX_VALUE))
-            .addGroup(allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(allChatLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(chatLayer)
-                    .addContainerGap()))
-            .addGroup(allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(allChatLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGap(0, 858, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -221,9 +200,9 @@ public class LoggedIndex extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(messaggio_field)
@@ -232,7 +211,7 @@ public class LoggedIndex extends javax.swing.JFrame {
                         .addGap(12, 12, 12))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(allChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(30, Short.MAX_VALUE))))
+                        .addContainerGap(23, Short.MAX_VALUE))))
             .addComponent(titleBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -269,8 +248,16 @@ public class LoggedIndex extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void invia_iconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invia_iconMouseClicked
-        // TODO add your handling code here:
+        sendMsg();
     }//GEN-LAST:event_invia_iconMouseClicked
+
+    public void sendMsg(){
+        String msg = messaggio_field.getText();
+        messaggio_field.setText("");
+        Message mMsg = new Message(msg,localuser,remoteuser);
+
+        proxy.SendMsgToServer(mMsg);
+    }
 
     /**
      * @param args the command line arguments
@@ -302,7 +289,7 @@ public class LoggedIndex extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoggedIndex("UserNotFound").setVisible(true);
+                new LoggedIndex("UserNotFound",null).setVisible(true);
 
             }
         });
@@ -310,7 +297,7 @@ public class LoggedIndex extends javax.swing.JFrame {
     }
 
     public void setIconaImage() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(("png/logo/logo-nobg-insidebg-64x64.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(("src/png/logo/logo-nobg-insidebg-64x64.png")));
         setTitle("Ketu");
     }
 
@@ -332,13 +319,138 @@ public class LoggedIndex extends javax.swing.JFrame {
     //metodo per ottenere la lista di tutti i contatti dal thread
     public void getLoadContacts(ArrayList<String> c){
         Contacts = c;
-        System.out.println(Contacts);
+        //cerco e rimuovo l'utente locale
+        for(int i=0;i<Contacts.size();i++){
+            if(Contacts.get(i).equals(localuser)){
+                Contacts.remove(i);
+                break;
+            }
+        }
+        this.startLoadChat();
+    }
+
+    //metodo per richiedere tutte le chat e salvarle in locale
+    public void startLoadChat(){
+        for(int i=0;i<Contacts.size();i++){
+            //proxy.LoadChat(localuser,Contacts.get(i));
+            this.addContact(Contacts.get(i),i);
+        }
+    }
+
+    //metodo che aggiunge un ItemPeople e un Panel (che contiene la chat) per ogni contatto (viene inizializzato nascosto)
+    public void addContact(String contact,int index){
+        //creo un nuovo item contenitore del contatto
+        ItemPeople jCont = new ItemPeople(contact);
+        ContactsBtn.add(jCont);
+        //imposto le sue proprietà
+        ContactsBtn.get(index).setSize(290,80);
+        ContactsBtn.get(index).setLocation(10, 10+(90*index));
+        ContactsBtn.get(index).setVisible(true);
+
+        //aggiungo il panel all'array di contattibtn
+        ContactsBtn.get(index).addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jContactMouseListener(evt);
+            }
+        });
+        
+        //aggiungo il panel all'interfaccia grafica e lo imposto come visibile
+        userList.add(ContactsBtn.get(index));
+        userList.getComponent(index).setVisible(true);
+
+        userList.repaint();
+        userList.revalidate();
+        
+        scrollPane.repaint();
+        scrollPane.revalidate();
+
+        //creo un nuovo item contenitore della chat
+         allChat.removeAll(); 
+        this.AddChatText("ciao", localuser);
+        this.AddChatText("ciao", "ciaoooo");
+        /* 
+        ScrollPaneWin11 spw = new ScrollPaneWin11();
+        allChat.add(spw);
+        spw.setVisible(true);
+        JPanel chatList = new JPanel();
+        chatList.setVisible(true);  
+        spw.add(chatList);
+        
+        
+        
+        ChatMessageReceiver chat = new ChatMessageReceiver ("Gesu è un bravo bimbo");
+        chat.setSize(290,80);
+        chat.setLocation(10, 10+(90*index));
+        chat.setVisible(true);
+        chatList.add(chat, "wrap, w 80%");
+
+        spw.repaint();
+        spw.revalidate();
+        chat.repaint();
+        chat.revalidate();
+        chatList.repaint();
+        chatList.revalidate();
+        */
+
+    }
+    
+    private void jContactMouseListener(java.awt.event.MouseEvent evt) {    
+        messaggio_field.setEditable(true);
+        YLastMessage = 0;  // reset the Last Message y coordinate
+        //remove all message in Jpanel Chat screen and refresh it
+        allChat.removeAll(); 
+        allChat.revalidate();
+        allChat.repaint();
+        ////set Layout null to the JPanel contact in order to manage messages position using x,y coordinates
+        allChat.setLayout(null);
+        allChat.setBackground(Color.LIGHT_GRAY);
+        allChat.setAutoscrolls(true);
+
+        ItemPeople name = (ItemPeople)evt.getSource();
+        //per capire chi ha azionato l'evento
+        int JLIdx = Integer.parseInt(name.getName());
+
+        //crea tutti gli elementi messaggio e li aggiunge alle chat
+        for(int i = 0; i<MsgsContacts.get(JLIdx).size();i++)
+        {
+            AddChatText(MsgsContacts.get(JLIdx).get(i).getMsg(), MsgsContacts.get(JLIdx).get(i).getSender());
+        }
+    }           
+
+    private void AddChatText(String text, String sender)
+    {
+        //create a new label with the message (this structure has been used just as app variable in order to understand the length of the message in pixel unit)
+        //create a JtextArea not editable to add in the Chat screen
+        ChatMessageReceiver MessTextAreaR;
+        ChatMessageSender MessTextAreaS;
+
+        //Choose the position of the added text considering the last message text to chose the right y coodinate
+        //and the sender to chose the right x coordinate
+        if(sender.equals(localuser)){
+            MessTextAreaR = new ChatMessageReceiver(text);
+            MessTextAreaR.setBounds(RemoteSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaR.getPreferredSize().width/MaxMessageWidth)+1)));
+            allChat.add(MessTextAreaR);
+        }  
+        else{
+            MessTextAreaS = new ChatMessageSender(text);
+            MessTextAreaS.setBounds(LocalSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaS.getPreferredSize().width/MaxMessageWidth)+1)));
+            allChat.add(MessTextAreaS);
+        }
+            
+        //update the last y coordinate of the message
+        //update the y size of the scroll bar
+        allChat.setPreferredSize(new Dimension(319, YLastMessage+SingleLineMessageHeight));
+        allChat.revalidate();
+        allChat.repaint();
+        //clear the input text area
+        messaggio_field.selectAll();
+        messaggio_field.replaceSelection("");
+        allChat.setVisible(false);
     }
 
     //metodo per ottenere la lista dei messaggi di un determinato contatto dal thread
     public void getLoadChat(ArrayList<Message> c){
         MsgsContacts.add(c);
-        System.out.println(MsgsContacts.get(MsgsContacts.size()));
     }
 
     //metodo per aggiungere un nuovo messaggio al db di messaggi locale
@@ -346,7 +458,7 @@ public class LoggedIndex extends javax.swing.JFrame {
         //ottieni chi manda il messaggio, ricerca a che posizione dell'array si trova la chat e aggiungi un elemento alla chat
         
         int index = this.getIndexList(msg.getSender());
-        MsgsContacts.get(index).add(msg);
+        MsgsContacts.get(index).add(msg);   
 
         //PARTE CHE AGGIUNGE A GUI CHE NON SO COME FARE AIUTAMI TI PREGO DIO SANTO
     }
@@ -357,7 +469,7 @@ public class LoggedIndex extends javax.swing.JFrame {
     }
 
     public int getIndexList(String usr){
-        //
+        //ottiene l'index del contatto presente nell'arraylist. Se non esiste torna -1
         int index = -1;
         for(int i=0;i<Contacts.size();i++){
             if(Contacts.get(i).equals(usr))
@@ -369,21 +481,15 @@ public class LoggedIndex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel allChat;
-    private javax.swing.JLayeredPane chatLayer;
-    private client.style.ChatMessageSender chatMessageSender1;
     private javax.swing.JLabel ciao_user;
     private javax.swing.JLabel icon_user;
     private javax.swing.JLabel invia_icon;
-    private client.style.ItemPeople itemPeople1;
-    private client.style.ItemPeople itemPeople2;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel ketu_logo;
     private javax.swing.JTextField messaggio_field;
     private javax.swing.JPanel panel_user;
     private client.style.ScrollPaneWin11 scrollPane;
     private client.style.TitleBar titleBar1;
+    private javax.swing.JPanel userList;
     // End of variables declaration//GEN-END:variables
 }

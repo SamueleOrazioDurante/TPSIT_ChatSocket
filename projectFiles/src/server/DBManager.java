@@ -65,10 +65,8 @@ public class DBManager {
         int result = UserNotFound;
         Node usersNode = db.getElementById(usr);
         
-        System.out.println("sdadas1");
         //controllo se il nodo esiste (result rimane come utente non trovato). Se esiste controllo se la password è uguale
         if(usersNode!=null){
-            System.out.println("sdadas2");
             if(usersNode.getFirstChild().getTextContent().equals(psw)){
                 result = PasswordChecked; 
                 //result diventa utente trovato e verificato

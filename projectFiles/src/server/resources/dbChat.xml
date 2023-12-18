@@ -2,6 +2,9 @@
 <!DOCTYPE Database SYSTEM "dbChat.dtd">
 <Database>
     <UserList>
+        <user username="a">
+            <password>a</password>
+        </user>
         <user username="Bersanella">
             <password>1234</password>
         </user>
@@ -17,6 +20,36 @@
         <user username="Test1">
             <password>Test1</password>
         </user>
+        <user username="Test2">
+            <password>1234</password>
+        </user>
+        <user username="Test3">
+            <password>Ciao</password>
+        </user>
+        <user username="Test4">
+            <password>fsdfds</password>
+        </user>
+        <user username="Test5">
+            <password>1234</password>
+        </user>
+        <user username="Test6">
+            <password>Test1</password>
+        </user>
+        <user username="Test7">
+            <password>1234</password>
+        </user>
+        <user username="Test8">
+            <password>Ciao</password>
+        </user>
+        <user username="Test9">
+            <password>fsdfds</password>
+        </user>
+        <user username="Test10">
+            <password>1234</password>
+        </user>
+        <user username="Test11">
+            <password>Test1</password>
+        </user>
     </UserList>
     <ChatList>
         <chat id="SamOraDur-RobMaMingo">
@@ -24,6 +57,18 @@
                 <Content>Ciao</Content>
                 <Sender>SamOraDur</Sender>
                 <Receiver>RobMaMingo</Receiver>
+            </ChatMessage>
+        </chat>
+        <chat id="Bersanella-Ciao">
+            <ChatMessage>
+                <Content>Ciao</Content>
+                <Sender>Ciao</Sender>
+                <Receiver>Bersanella</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao2</Content>
+                <Sender>Bersanella</Sender>
+                <Receiver>Ciao</Receiver>
             </ChatMessage>
         </chat>
     </ChatList>

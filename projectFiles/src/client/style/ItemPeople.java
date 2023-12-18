@@ -4,16 +4,27 @@
  */
 package client.style;
 
+import java.util.Objects;
+
+import javax.swing.JLabel;
+
 /**
  *
  * @author matt3
  */
 public class ItemPeople extends javax.swing.JPanel {
 
+    String usr;
     /**
      * Creates new form ItemPeople
      */
     public ItemPeople() {
+        this.usr = "null";
+        initComponents();
+    }
+
+    public ItemPeople(String usr) {
+        this.usr = usr;
         initComponents();
     }
     
@@ -35,16 +46,16 @@ public class ItemPeople extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(18, 18, 18));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\matt3\\Documents\\GitHub\\TPSIT_ChatSocket\\projectFiles\\src\\png\\logo\\logo-nobg-insidebg-64x64.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("src\\png\\logo\\logo-nobg-insidebg-64x64.png")); // NOI18N
 
         jLabel2.setBackground(new java.awt.Color(241, 241, 241));
         jLabel2.setForeground(new java.awt.Color(241, 241, 241));
-        jLabel2.setText("User");
+        jLabel2.setText(usr);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
@@ -53,10 +64,10 @@ public class ItemPeople extends javax.swing.JPanel {
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

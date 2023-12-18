@@ -50,7 +50,7 @@ public class ChatClientThread extends Thread{
                     case "ChatLoading":{
                         
                         //tutti i messaggi della chat nel pacchetto XML
-                        NodeList chat = pkt.getElementsByTagName("XMLMsg");
+                        NodeList chat = pkt.getElementsByTagName("ChatMessage");
 
                         //creo un arraylist di tutti i messaggi
                         ArrayList<Message> chatMsgs = new ArrayList<Message>();
@@ -87,9 +87,10 @@ public class ChatClientThread extends Thread{
                         //..
                         ArrayList<String> contacts = new ArrayList<String>();
                         NodeList contactsList = pkt.getElementsByTagName("user");
+                
                         for(int i=0;i<contactsList.getLength();i++){
 
-                            String contact = contactsList.item(i).getAttributes().getNamedItem("nickName").getTextContent();
+                            String contact = contactsList.item(i).getAttributes().getNamedItem("username").getTextContent();
                             contacts.add(contact);
                         }
 

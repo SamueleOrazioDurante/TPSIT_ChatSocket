@@ -9,6 +9,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import client.Message;
+
 public class XMLMsgBuilder {
 
     private static DocumentBuilderFactory factory;
@@ -94,8 +96,9 @@ public class XMLMsgBuilder {
         rootElement.appendChild(e);
 
         //si crea infine l'elemento chat vero e proprio
-        Element eChat = doc.createElement("chat");
-
+        Element eChat = doc.createElement("Chat");
+        if(chat==null)
+            return doc;
         for(int i = 0; i<chat.getLength();i++){
             Node msg = doc.importNode(chat.item(i),true);
             eChat.appendChild(msg);
@@ -103,6 +106,37 @@ public class XMLMsgBuilder {
 
         rootElement.appendChild(eChat);
         
+        return doc;
+    }
+
+     //metodo per invio messaggio tramite pacchetto XML
+    public Document createMsgXMLObj(Message msg){
+        Document doc = docBuild.newDocument();
+        Element rootElement = doc.createElement("XMLPkt");
+        doc.appendChild(rootElement);
+
+        //vengono creati un elemento operation e un nodo messaggio che conterrà il contenuto del messaggio stesso
+        Element e = doc.createElement("Operation");
+        e.setTextContent("SendMsg"); //ex MsgFwd
+        rootElement.appendChild(e);
+        Element eChatList = doc.createElement("ChatMessages");
+        rootElement.appendChild(eChatList);
+
+        e = doc.createElement("Content");
+        e.setTextContent(msg.getMsg());
+        eChatList.appendChild(e);
+
+         e = doc.createElement("Sender");
+        e.setTextContent(msg.getReceiver());
+        eChatList.appendChild(e);
+
+        e = doc.createElement("Receiver");
+        e.setTextContent(msg.getSender());
+        eChatList.appendChild(e);
+
+        Node msgXML = doc.importNode(eChatList, true);
+        rootElement.appendChild(msgXML);
+
         return doc;
     }
 
@@ -143,13 +177,36 @@ public class XMLMsgBuilder {
         Element rootElement = doc.createElement("XMLPkt");
         doc.appendChild(rootElement);
 
-        //vengono creati un elemento operation e un nodo che contiene l'utente che contiene tutti gli altri utenti
+        //vengono creati un elemento operation e un nodo che contiene l'utente che richiede tutti gli altri utenti
         Element e = doc.createElement("Operation");
         e.setTextContent("ContactRequest");
         rootElement.appendChild(e);
 
         e = doc.createElement("user");
         e.setTextContent(usr);
+        rootElement.appendChild(e);
+
+        return doc;
+    }
+
+    //metodo per caricare le chat dal db al client
+    public Document createLoadChatRequestXMLObj(String usr_a,String usr_b){
+
+        Document doc = docBuild.newDocument();
+        Element rootElement = doc.createElement("XMLPkt");
+        doc.appendChild(rootElement);
+
+        //vengono creati un elemento operation e un nodo che contiene i due utenti
+        Element e = doc.createElement("Operation");
+        e.setTextContent("loadChat");
+        rootElement.appendChild(e);
+
+        e = doc.createElement("localUser");
+        e.setTextContent(usr_a);
+        rootElement.appendChild(e);
+
+        e = doc.createElement("remoteUser");
+        e.setTextContent(usr_b);
         rootElement.appendChild(e);
 
         return doc;
@@ -169,10 +226,9 @@ public class XMLMsgBuilder {
         rootElement.appendChild(e);
 
         //si crea infine l'elemento chat vero e proprio contenente ogni user
-        Element eUser = doc.createElement("user");
+        Element eUser = doc.createElement("userList");
 
         for(int i = 0; i<contacts.getLength();i++){
-
             Node contact = doc.importNode(contacts.item(i),true);
             eUser.appendChild(contact);
         }
