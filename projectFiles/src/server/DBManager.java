@@ -39,8 +39,8 @@ public class DBManager {
     private final int UserDuplicated = 0;
     private final int SignUpChecked = 1;
 
-    protected static final String XML_FILE_PATH = "server\\resources\\dbChat.xml";
-    protected static final String DTD_FILE_PATH = "server\\resources\\dbChat.dtd";
+    protected static final String XML_FILE_PATH = "src\\server\\resources\\dbChat.xml";
+    protected static final String DTD_FILE_PATH = "dbChat.dtd";
     private DocumentBuilder builder;
     private File XMLFile;
 
