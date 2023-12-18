@@ -120,6 +120,7 @@ public class DBManager {
             //estrapolazione di sender e receiver dal pacchetto messagio
             String send = msg.getElementsByTagName("Sender").item(0).getTextContent();
             String receive = msg.getElementsByTagName("Receiver").item(0).getTextContent();
+
             
             //creazione di un elemento chat con tutti i messaggi della chat tra i due usr e un nodo con il messaggio da aggiungere
             Element chat = db.getElementById(send+"-"+receive);
@@ -138,11 +139,11 @@ public class DBManager {
                     Element chatN = db.createElement("chat");
                     chatN.setAttribute("id",send+"-"+receive);
                     chatN.appendChild(newMsg);
-                    Element chatListN = (Element)db.getElementsByTagName("ChatList");
+                    Element chatListN = (Element)db.getChildNodes().item(1).getChildNodes().item(1);
                     chatListN.appendChild(chatN);
                 }
             }
-
+            saveXmlDocument(db, XML_FILE_PATH);
             
 
             //operazioni svolte con successo

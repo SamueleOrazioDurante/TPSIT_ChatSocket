@@ -2,73 +2,74 @@
 <!DOCTYPE Database SYSTEM "dbChat.dtd">
 <Database>
     <UserList>
-        <user username="a">
-            <password>a</password>
+        <user username="Sam">
+            <password>1</password>
         </user>
-        <user username="Bersanella">
-            <password>1234</password>
+        <user username="Rob">
+            <password>2</password>
         </user>
-        <user username="Ciao">
-            <password>Ciao</password>
+        <user username="Mat">
+            <password>3</password>
         </user>
-        <user username="dfssdf">
-            <password>fsdfds</password>
-        </user>
-        <user username="Matteo">
-            <password>1234</password>
-        </user>
-        <user username="Test1">
-            <password>Test1</password>
-        </user>
-        <user username="Test2">
-            <password>1234</password>
-        </user>
-        <user username="Test3">
-            <password>Ciao</password>
-        </user>
-        <user username="Test4">
-            <password>fsdfds</password>
-        </user>
-        <user username="Test5">
-            <password>1234</password>
-        </user>
-        <user username="Test6">
-            <password>Test1</password>
-        </user>
-        <user username="Test7">
-            <password>1234</password>
-        </user>
-        <user username="Test8">
-            <password>Ciao</password>
-        </user>
-        <user username="Test9">
-            <password>fsdfds</password>
-        </user>
-        <user username="Test10">
-            <password>1234</password>
-        </user>
-        <user username="Test11">
-            <password>Test1</password>
+        <user username="Mar">
+            <password>4</password>
         </user>
     </UserList>
     <ChatList>
-        <chat id="SamOraDur-RobMaMingo">
+        <chat id="Rob-Sam">
             <ChatMessage>
-                <Content>Ciao</Content>
-                <Sender>SamOraDur</Sender>
-                <Receiver>RobMaMingo</Receiver>
+                <Content>fsdfsd</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>fdsdfs</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>fgd</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaoooo</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao test numero84528452842358745238</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooooo1</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooo3</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooo6</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
             </ChatMessage>
         </chat>
-        <chat id="Bersanella-Ciao">
+        <chat id="Mat-Sam">
             <ChatMessage>
-                <Content>Ciao</Content>
-                <Sender>Ciao</Sender>
-                <Receiver>Bersanella</Receiver>
+                <Content>Test2</Content>
+                <Sender>Mat</Sender>
+                <Receiver>Sam</Receiver>
             </ChatMessage>
+        </chat>
+        <chat id="Mar-Sam">
             <ChatMessage>
-                <Content>Ciao2</Content>
-                <Sender>Bersanella</Sender>
-                <Receiver>Ciao</Receiver>
+                <Content>Test3</Content>
+                <Sender>Mar</Sender>
+                <Receiver>Sam</Receiver>
             </ChatMessage>
         </chat>
     </ChatList>

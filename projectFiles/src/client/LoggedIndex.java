@@ -5,8 +5,12 @@
 package client;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,7 +41,7 @@ public class LoggedIndex extends javax.swing.JFrame {
 
     //variabili della classe LoggedIndex
     String localuser = "UserNotFound";  //utilizzata nel caso il programma venga aperto in modo non corretto 
-    String remoteuser;
+    String remoteuser = "Sam";
 
     ChatClientProxy proxy;
     
@@ -105,12 +109,19 @@ public class LoggedIndex extends javax.swing.JFrame {
         scrollPane = new client.style.ScrollPaneWin11();
         userList = new javax.swing.JPanel();
         allChat = new javax.swing.JPanel();
+        scrollPaneWin111 = new client.style.ScrollPaneWin11();
+        chat = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
         setUndecorated(true);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(18, 18, 18));
         jPanel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
@@ -182,15 +193,28 @@ public class LoggedIndex extends javax.swing.JFrame {
 
         allChat.setBackground(new java.awt.Color(43, 43, 43));
 
+        javax.swing.GroupLayout chatLayout = new javax.swing.GroupLayout(chat);
+        chat.setLayout(chatLayout);
+        chatLayout.setHorizontalGroup(
+            chatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 648, Short.MAX_VALUE)
+        );
+        chatLayout.setVerticalGroup(
+            chatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 855, Short.MAX_VALUE)
+        );
+
+        scrollPaneWin111.setViewportView(chat);
+
         javax.swing.GroupLayout allChatLayout = new javax.swing.GroupLayout(allChat);
         allChat.setLayout(allChatLayout);
         allChatLayout.setHorizontalGroup(
             allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 651, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
         allChatLayout.setVerticalGroup(
             allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 858, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -251,12 +275,20 @@ public class LoggedIndex extends javax.swing.JFrame {
         sendMsg();
     }//GEN-LAST:event_invia_iconMouseClicked
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            sendMsg();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
     public void sendMsg(){
         String msg = messaggio_field.getText();
-        messaggio_field.setText("");
-        Message mMsg = new Message(msg,localuser,remoteuser);
+            if(msg.length()!=0){
+            messaggio_field.setText("");
+            Message mMsg = new Message(msg,remoteuser,localuser);
 
-        proxy.SendMsgToServer(mMsg);
+            proxy.SendMsgToServer(mMsg);
+        }
     }
 
     /**
@@ -332,7 +364,7 @@ public class LoggedIndex extends javax.swing.JFrame {
     //metodo per richiedere tutte le chat e salvarle in locale
     public void startLoadChat(){
         for(int i=0;i<Contacts.size();i++){
-            //proxy.LoadChat(localuser,Contacts.get(i));
+            proxy.LoadChat(localuser,Contacts.get(i));
             this.addContact(Contacts.get(i),i);
         }
     }
@@ -345,8 +377,9 @@ public class LoggedIndex extends javax.swing.JFrame {
         //imposto le sue proprietà
         ContactsBtn.get(index).setSize(290,80);
         ContactsBtn.get(index).setLocation(10, 10+(90*index));
+        ContactsBtn.get(index).setName(""+index);
         ContactsBtn.get(index).setVisible(true);
-
+        
         //aggiungo il panel all'array di contattibtn
         ContactsBtn.get(index).addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -363,35 +396,6 @@ public class LoggedIndex extends javax.swing.JFrame {
         
         scrollPane.repaint();
         scrollPane.revalidate();
-
-        //creo un nuovo item contenitore della chat
-         allChat.removeAll(); 
-        this.AddChatText("ciao", localuser);
-        this.AddChatText("ciao", "ciaoooo");
-        /* 
-        ScrollPaneWin11 spw = new ScrollPaneWin11();
-        allChat.add(spw);
-        spw.setVisible(true);
-        JPanel chatList = new JPanel();
-        chatList.setVisible(true);  
-        spw.add(chatList);
-        
-        
-        
-        ChatMessageReceiver chat = new ChatMessageReceiver ("Gesu è un bravo bimbo");
-        chat.setSize(290,80);
-        chat.setLocation(10, 10+(90*index));
-        chat.setVisible(true);
-        chatList.add(chat, "wrap, w 80%");
-
-        spw.repaint();
-        spw.revalidate();
-        chat.repaint();
-        chat.revalidate();
-        chatList.repaint();
-        chatList.revalidate();
-        */
-
     }
     
     private void jContactMouseListener(java.awt.event.MouseEvent evt) {    
@@ -409,7 +413,8 @@ public class LoggedIndex extends javax.swing.JFrame {
         ItemPeople name = (ItemPeople)evt.getSource();
         //per capire chi ha azionato l'evento
         int JLIdx = Integer.parseInt(name.getName());
-
+        remoteuser = Contacts.get(JLIdx);
+        System.out.println(remoteuser);
         //crea tutti gli elementi messaggio e li aggiunge alle chat
         for(int i = 0; i<MsgsContacts.get(JLIdx).size();i++)
         {
@@ -419,33 +424,38 @@ public class LoggedIndex extends javax.swing.JFrame {
 
     private void AddChatText(String text, String sender)
     {
-        //create a new label with the message (this structure has been used just as app variable in order to understand the length of the message in pixel unit)
-        //create a JtextArea not editable to add in the Chat screen
+
         ChatMessageReceiver MessTextAreaR;
         ChatMessageSender MessTextAreaS;
 
-        //Choose the position of the added text considering the last message text to chose the right y coodinate
-        //and the sender to chose the right x coordinate
         if(sender.equals(localuser)){
             MessTextAreaR = new ChatMessageReceiver(text);
-            MessTextAreaR.setBounds(RemoteSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaR.getPreferredSize().width/MaxMessageWidth)+1)));
-            allChat.add(MessTextAreaR);
+            //MessTextAreaR.setBounds(RemoteSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaR.getPreferredSize().width/MaxMessageWidth)+1)));
+            
+            MessTextAreaR.setSize(400,100);
+            MessTextAreaR.setLocation(10, 10);
+            chat.add(MessTextAreaR);
+            MessTextAreaR.setVisible(true);
         }  
         else{
+            
             MessTextAreaS = new ChatMessageSender(text);
-            MessTextAreaS.setBounds(LocalSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaS.getPreferredSize().width/MaxMessageWidth)+1)));
-            allChat.add(MessTextAreaS);
+            MessTextAreaS.setSize(400,100);
+            MessTextAreaS.setLocation(10, 10);
+            //MessTextAreaS.setBounds(LocalSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaS.getPreferredSize().width/MaxMessageWidth)+1)));
+            chat.add(MessTextAreaS);
+            MessTextAreaS.setVisible(true);
         }
             
         //update the last y coordinate of the message
         //update the y size of the scroll bar
-        allChat.setPreferredSize(new Dimension(319, YLastMessage+SingleLineMessageHeight));
-        allChat.revalidate();
-        allChat.repaint();
+        chat.setPreferredSize(new Dimension(319, YLastMessage+SingleLineMessageHeight));
+        chat.revalidate();
+        chat.repaint();
         //clear the input text area
         messaggio_field.selectAll();
         messaggio_field.replaceSelection("");
-        allChat.setVisible(false);
+        chat.setVisible(true);
     }
 
     //metodo per ottenere la lista dei messaggi di un determinato contatto dal thread
@@ -456,7 +466,7 @@ public class LoggedIndex extends javax.swing.JFrame {
     //metodo per aggiungere un nuovo messaggio al db di messaggi locale
     public void getSendMsg(Message msg){
         //ottieni chi manda il messaggio, ricerca a che posizione dell'array si trova la chat e aggiungi un elemento alla chat
-        
+        System.out.println(msg.getMsg() + " " + msg.getSender());
         int index = this.getIndexList(msg.getSender());
         MsgsContacts.get(index).add(msg);   
 
@@ -481,6 +491,7 @@ public class LoggedIndex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel allChat;
+    private javax.swing.JPanel chat;
     private javax.swing.JLabel ciao_user;
     private javax.swing.JLabel icon_user;
     private javax.swing.JLabel invia_icon;
@@ -489,6 +500,7 @@ public class LoggedIndex extends javax.swing.JFrame {
     private javax.swing.JTextField messaggio_field;
     private javax.swing.JPanel panel_user;
     private client.style.ScrollPaneWin11 scrollPane;
+    private client.style.ScrollPaneWin11 scrollPaneWin111;
     private client.style.TitleBar titleBar1;
     private javax.swing.JPanel userList;
     // End of variables declaration//GEN-END:variables

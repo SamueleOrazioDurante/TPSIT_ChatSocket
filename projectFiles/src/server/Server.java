@@ -64,7 +64,7 @@ public class Server implements ChatFeat{
     //metodo per mandare il messaggio al ricevente
     public String SendMsg(Element msg){
         dbm.UpdateDB(msg);
-        return msg.getElementsByTagName("receive").item(0).getTextContent();
+        return msg.getElementsByTagName("Receiver").item(0).getTextContent();
     }
 
     @Override

@@ -110,7 +110,7 @@ public class ServerThread extends Thread {
 						break;
 					}	
 					case "SendMsg":{
-						Element msg = (Element) msgPkt.getElementsByTagName("ChatMessages").item(0);
+						Element msg = (Element) msgPkt.getElementsByTagName("ChatMessage").item(0);
 						String receive = sk.SendMsg(msg);
 						sk.AddMsgTerminal("	\t[Server]: Ricevuto messaggio. \n\t\t\t[Content]: LocalUser: "+msg.getChildNodes().item(1).getTextContent()+"\n\t\t\t[Content]: RemoteUser: "+msg.getChildNodes().item(2).getTextContent());
 						map_sem.acquire();

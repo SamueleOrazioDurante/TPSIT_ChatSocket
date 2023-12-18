@@ -110,7 +110,7 @@ public class XMLMsgBuilder {
     }
 
      //metodo per invio messaggio tramite pacchetto XML
-    public Document createMsgXMLObj(Message msg){
+    public Document createMsgCXMLObj(Message msg){
         Document doc = docBuild.newDocument();
         Element rootElement = doc.createElement("XMLPkt");
         doc.appendChild(rootElement);
@@ -119,7 +119,7 @@ public class XMLMsgBuilder {
         Element e = doc.createElement("Operation");
         e.setTextContent("SendMsg"); //ex MsgFwd
         rootElement.appendChild(e);
-        Element eChatList = doc.createElement("ChatMessages");
+        Element eChatList = doc.createElement("ChatMessage");
         rootElement.appendChild(eChatList);
 
         e = doc.createElement("Content");

@@ -133,7 +133,7 @@ public class ChatClientProxy implements ChatFeat{
     public String SendMsgToServer(Message msg){
         try{
             //creazione pacchetto con metodi del message builder
-            Document pkt = msgBuilder.createMsgXMLObj(msg);
+            Document pkt = msgBuilder.createMsgCXMLObj(msg);
             oos.writeObject(pkt);   
 
         }catch(IOException e){
