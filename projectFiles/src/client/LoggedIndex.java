@@ -18,6 +18,8 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import client.style.ItemPeople;
+
 /**
  *
  * @author matt3
@@ -30,8 +32,9 @@ public class LoggedIndex extends javax.swing.JFrame {
     //arraylist -> database locale
     ArrayList<String> Contacts = new ArrayList<String>(); //arraylist di contatti
     ArrayList<ArrayList<Message>> MsgsContacts = new ArrayList<ArrayList<Message>>(); // arraylist di arraylist di messaggi (uno per utente)
-    
-    //
+    ArrayList<ItemPeople> ContactsBtn = new ArrayList<ItemPeople>(); //arraylist dei vari bottoni che permette di accedere alle varie chat
+
+    //altre variabili per la gestione della stampa a video di contatti e messaggi
     
     
     
@@ -325,6 +328,13 @@ public class LoggedIndex extends javax.swing.JFrame {
         // Imposta la posizione del JFrame
         setLocation(x, y);
     }
+
+    //metodo per richiedere al server la lista di tutti i contatti
+    public void getLoadContacts(ArrayList<String> c){
+        Contacts = c;
+    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel allChat;

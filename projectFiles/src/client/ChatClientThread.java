@@ -93,7 +93,7 @@ public class ChatClientThread extends Thread{
                             contacts.add(contact);
                         }
 
-                        clientInterface.getLoadingContacts(contacts);
+                        clientInterface.getLoadContacts(contacts);
                         
                         break;
                     }
