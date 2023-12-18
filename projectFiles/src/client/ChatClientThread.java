@@ -62,7 +62,7 @@ public class ChatClientThread extends Thread{
                         }
 
                         //mandiamo all'interfaccia l'arraylist dei messaggi (a sua volta un arraylist con messaggio,sender e receiver)
-                        clientInterface.LoadingChat(chatMsgs);
+                        clientInterface.GetLoadChat(chatMsgs);
                         
                         break;
                     }
@@ -71,7 +71,7 @@ public class ChatClientThread extends Thread{
                         //prendiamo il messaggio dal pacchetto xml e lo mandiamo all'interfaccia della chat
                         Element e = (Element) pkt.getElementsByTagName("XMLMsg");
                         Message msg = new Message(e.getElementsByTagName("Content").item(0).getTextContent(),e.getElementsByTagName("Sender").item(0).getTextContent());
-                        clientInterface.GetSendMessage(msg);
+                        clientInterface.GetSendMsg(msg);
                         
                         break;
                     }

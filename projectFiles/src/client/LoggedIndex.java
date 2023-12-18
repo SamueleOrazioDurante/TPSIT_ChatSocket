@@ -329,11 +329,27 @@ public class LoggedIndex extends javax.swing.JFrame {
         setLocation(x, y);
     }
 
-    //metodo per richiedere al server la lista di tutti i contatti
+    //metodo per ottenere la lista di tutti i contatti dal thread
     public void getLoadContacts(ArrayList<String> c){
         Contacts = c;
+        System.out.println(Contacts);
     }
 
+    //metodo per ottenere la lista dei messaggi di un determinato contatto dal thread
+    public void getLoadChat(ArrayList<Message> c){
+        MsgsContacts.add(c);
+        System.out.println(MsgsContacts.get(MsgsContacts.size()));
+    }
+
+    //metodo per aggiungere un nuovo messaggio al db di messaggi locale
+    public void getLoadMsg(Message msg){
+        //ottieni chi manda il messaggio, ricerca a che posizione dell'array si trova la chat e aggiungi un elemento alla chat
+    }
+
+    //metodo per mandare l'ack
+    public void getSentMsgAck(){
+        // ?TBD
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
