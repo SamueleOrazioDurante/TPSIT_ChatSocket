@@ -4,6 +4,8 @@
  */
 package client.style;
 
+import java.awt.Color;
+
 /**
  *
  * @author matt3
@@ -14,9 +16,10 @@ public class ChatMessageReceiver extends javax.swing.JPanel {
     /**
      * Creates new form ItemPeople
      */
-    public ChatMessageReceiver(String txt) {
+    public ChatMessageReceiver(String txt, Color color) {
         this.text = txt;
         initComponents();
+        jLabel2.setForeground(color);
     }
     
     public static void main(String[] args) {

@@ -18,7 +18,7 @@
     <ChatList>
         <chat id="Rob-Sam">
             <ChatMessage>
-                <Content>fsdfsd</Content>
+                <Content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Content>
                 <Sender>Rob</Sender>
                 <Receiver>Sam</Receiver>
             </ChatMessage>
@@ -57,6 +57,126 @@
                 <Sender>Rob</Sender>
                 <Receiver>Sam</Receiver>
             </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>gfgf</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>ciao</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>//invio messaggio al client receiver</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooo</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooooo</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooooo</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooooooooo2</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooooo3</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>C</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>sdsd</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao quanto tempo</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao come stai?</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>d</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>CIaooo</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaooooooooooooooooooooooooooooooooo</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaoo</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>fgfggffg</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciaoooo</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ora vado a dormire</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Rob</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Notte</Content>
+                <Sender>Rob</Sender>
+                <Receiver>Sam</Receiver>
+            </ChatMessage>
         </chat>
         <chat id="Mat-Sam">
             <ChatMessage>
@@ -64,12 +184,32 @@
                 <Sender>Mat</Sender>
                 <Receiver>Sam</Receiver>
             </ChatMessage>
+            <ChatMessage>
+                <Content>gfgfdgfdfgdgfd</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Mat</Receiver>
+            </ChatMessage>
         </chat>
         <chat id="Mar-Sam">
             <ChatMessage>
                 <Content>Test3</Content>
                 <Sender>Mar</Sender>
                 <Receiver>Sam</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt enim sed augue accumsan tempor. Suspendisse sed dui vitae sapien ullamcorper aliquet at nec metus. Sed hendrerit id ante et efficitur. Suspendisse metus felis, suscipit vitae luctus vitae, finibus sed enim. Donec non enim ut sapien tempor malesuada. Aliquam tempus, orci at rutrum pulvinar, leo nibh pharetra nulla, sagittis malesuada nisi erat sit amet neque. Sed sagittis bibendum nisi non accumsan. In a elit eu mauris facilisis consectetur. Aenean sit amet eleifend urna, nec fermentum metus.  Duis hendrerit urna sed augue aliquam vehicula. Suspendisse varius purus elit, nec maximus metus luctus in. Nunc et augue sed massa porta efficitur. Morbi ullamcorper velit ut commodo lacinia. Mauris eget purus orci. Ut maximus tincidunt tortor, in lacinia mauris. Nam sed leo dignissim, aliquam ante in, commodo magna. Maecenas tincidunt varius fermentum. Morbi ut hendrerit arcu. Duis nibh ligula, vestibulum viverra feugiat et, iaculis ut dolor. Nullam sodales fermentum neque ac luctus.  Vestibulum semper hendrerit dui, eu volutpat magna. In euismod dui sit amet vulputate pharetra. Curabitur fermentum ut elit sit amet varius. Nulla nec scelerisque tortor. Morbi auctor, nisl nec aliquam tempor, erat ligula iaculis nunc, imperdiet interdum sem turpis a ex. Nam id vestibulum quam. Morbi auctor pharetra magna, id dignissim sapien. Mauris non ipsum lobortis, varius purus nec, hendrerit diam. Integer condimentum sagittis turpis, at elementum erat.  Donec elementum semper urna ac volutpat. In congue lorem vel dui suscipit volutpat. In dictum id quam eget tristique. Aenean et blandit quam. Donec vitae ex lobortis, sollicitudin nulla eget, ullamcorper urna. Sed ut eros metus. Vivamus venenatis odio est, non cursus risus lobortis nec. Vivamus iaculis sem eget suscipit volutpat. Etiam venenatis libero quam, ac fermentum quam bibendum eget. Vestibulum in tempor sapien. Nulla porta neque at egestas tincidunt. Integer commodo sem non porta convallis.  Aliquam dolor augue, rhoncus et elit ut, iaculis aliquam lacus. Nunc dignissim id odio sed dictum. Donec consequat convallis libero, in aliquet diam faucibus eu. Pellentesque dignissim massa nunc, ac laoreet justo tristique at. Fusce dui metus, fringilla ut ultrices luctus, malesuada in nisl. Aenean rhoncus vulputate eros placerat iaculis. Duis varius at odio vel pretium. Praesent consequat sed eros vitae cursus. Integer ultrices ex eget suscipit semper. Nulla tristique facilisis dolor vel efficitur. Suspendisse lacinia ut orci in pretium. Suspendisse posuere, ante vitae lobortis ultricies, magna ante fermentum nibh, id tincidunt leo odio eget odio. Nulla euismod, massa sit amet facilisis sagittis, lorem elit efficitur lectus, ac pellentesque arcu diam vel dui. Proin lobortis arcu massa, vulputate venenatis enim egestas eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut sit amet sagittis turpis, quis interdum tortor.</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Mar</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>Ciao</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Mar</Receiver>
+            </ChatMessage>
+            <ChatMessage>
+                <Content>TestScrollBarHoSonno</Content>
+                <Sender>Sam</Sender>
+                <Receiver>Mar</Receiver>
             </ChatMessage>
         </chat>
     </ChatList>

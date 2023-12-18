@@ -113,13 +113,21 @@ public class ServerThread extends Thread {
 						Element msg = (Element) msgPkt.getElementsByTagName("ChatMessage").item(0);
 						String receive = sk.SendMsg(msg);
 						sk.AddMsgTerminal("	\t[Server]: Ricevuto messaggio. \n\t\t\t[Content]: LocalUser: "+msg.getChildNodes().item(1).getTextContent()+"\n\t\t\t[Content]: RemoteUser: "+msg.getChildNodes().item(2).getTextContent());
-						map_sem.acquire();
-						ObjectOutputStream oos = map.get(receive);
-						map_sem.release();
+						
+						//aggiunta di eccezioni per aggiungere il messaggio al database senza errori anche se il receiver è offline (non presente nella hashmap)
+						try {
+							map_sem.acquire();
+							ObjectOutputStream oos = map.get(receive);
+							map_sem.release();
 
-						//invio messaggio al client receiver
-						Document msgPktOut = msgBuilder.createMsgXMLObj(msg); //TO BE FOUND
-						oos.writeObject(msgPktOut);
+							//invio messaggio al client receiver
+							Document msgPktOut = msgBuilder.createMsgXMLObj(msg);
+							oos.writeObject(msgPktOut);
+
+						} catch (SocketException | NullPointerException e) {
+							e.printStackTrace();
+						}
+						
 						sk.AddMsgTerminal("	\t[Server]: Invio del messaggio al destinatario eseguito con successo.");
 
 						//pacchetto per informare il mittente che il messaggio è arrivato al destinatario

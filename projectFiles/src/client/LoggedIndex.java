@@ -8,30 +8,38 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.awt.Image;
+import java.awt.Point;
+
 import javax.imageio.ImageIO;
 import javax.sql.ConnectionPoolDataSource;
 import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 
 import client.style.ChatMessageReceiver;
 import client.style.ChatMessageSender;
 import client.style.ItemPeople;
 import client.style.ScrollPaneWin11;
+import server.index;
 
 /**
  *
@@ -53,14 +61,13 @@ public class LoggedIndex extends javax.swing.JFrame {
     //altre variabili per la gestione della stampa a video di contatti e messaggi
     private int fixedMessageYOffset = 25;
     private int YLastMessage = 0;
-    private final int MaxMessageWidth = 170;
-    private final int RemoteSenderStartOffsetMessage = 200;
-    private final int LocalSenderStartOffsetMessage = 0;
+    private final int MaxMessageWidth = 300;
+    private final int RemoteSenderStartOffsetMessage = 10;
+    private final int LocalSenderStartOffsetMessage = 315;
     private int SingleLineMessageHeight = 18;
-    private final int ContactHeight = 50;
-    private final int ContactWidth = 170;
-    
-    
+    private final int ContactHeight = 80;
+    private final int ContactWidth = 290;
+
     /**
      * Creates new form Login2
      */
@@ -71,6 +78,7 @@ public class LoggedIndex extends javax.swing.JFrame {
         centrareJFrame();
         setIconaImage();
         titleBar1.init(this);
+        messaggio_field.setEditable(false);
 
         initVar(usr,prx);    
 
@@ -166,6 +174,11 @@ public class LoggedIndex extends javax.swing.JFrame {
         messaggio_field.setBackground(new java.awt.Color(18, 18, 18));
         messaggio_field.setForeground(new java.awt.Color(225, 225, 225));
         messaggio_field.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(187, 134, 252)));
+        messaggio_field.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                messaggio_fieldKeyPressed(evt);
+            }
+        });
 
         invia_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         invia_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/loggedindex/telegram-xxl-32x32.png"))); // NOI18N
@@ -193,6 +206,10 @@ public class LoggedIndex extends javax.swing.JFrame {
 
         allChat.setBackground(new java.awt.Color(43, 43, 43));
 
+        scrollPaneWin111.setBackground(new java.awt.Color(43, 43, 43));
+
+        chat.setBackground(new java.awt.Color(43, 43, 43));
+
         javax.swing.GroupLayout chatLayout = new javax.swing.GroupLayout(chat);
         chat.setLayout(chatLayout);
         chatLayout.setHorizontalGroup(
@@ -210,11 +227,11 @@ public class LoggedIndex extends javax.swing.JFrame {
         allChat.setLayout(allChatLayout);
         allChatLayout.setHorizontalGroup(
             allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         allChatLayout.setVerticalGroup(
             allChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
+            .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -281,12 +298,18 @@ public class LoggedIndex extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formKeyPressed
 
+    private void messaggio_fieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messaggio_fieldKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            sendMsg();
+        }
+    }//GEN-LAST:event_messaggio_fieldKeyPressed
+
     public void sendMsg(){
         String msg = messaggio_field.getText();
-            if(msg.length()!=0){
+        if(msg.length()!=0){
             messaggio_field.setText("");
+            this.AddChatText(msg, localuser);
             Message mMsg = new Message(msg,remoteuser,localuser);
-
             proxy.SendMsgToServer(mMsg);
         }
     }
@@ -375,7 +398,7 @@ public class LoggedIndex extends javax.swing.JFrame {
         ItemPeople jCont = new ItemPeople(contact);
         ContactsBtn.add(jCont);
         //imposto le sue proprietà
-        ContactsBtn.get(index).setSize(290,80);
+        ContactsBtn.get(index).setSize(ContactWidth,ContactHeight);
         ContactsBtn.get(index).setLocation(10, 10+(90*index));
         ContactsBtn.get(index).setName(""+index);
         ContactsBtn.get(index).setVisible(true);
@@ -402,19 +425,15 @@ public class LoggedIndex extends javax.swing.JFrame {
         messaggio_field.setEditable(true);
         YLastMessage = 0;  // reset the Last Message y coordinate
         //remove all message in Jpanel Chat screen and refresh it
-        allChat.removeAll(); 
-        allChat.revalidate();
-        allChat.repaint();
-        ////set Layout null to the JPanel contact in order to manage messages position using x,y coordinates
-        allChat.setLayout(null);
-        allChat.setBackground(Color.LIGHT_GRAY);
-        allChat.setAutoscrolls(true);
+        chat.removeAll(); 
+        chat.revalidate();
+        chat.setAutoscrolls(true);
 
         ItemPeople name = (ItemPeople)evt.getSource();
         //per capire chi ha azionato l'evento
         int JLIdx = Integer.parseInt(name.getName());
         remoteuser = Contacts.get(JLIdx);
-        System.out.println(remoteuser);
+  
         //crea tutti gli elementi messaggio e li aggiunge alle chat
         for(int i = 0; i<MsgsContacts.get(JLIdx).size();i++)
         {
@@ -424,38 +443,82 @@ public class LoggedIndex extends javax.swing.JFrame {
 
     private void AddChatText(String text, String sender)
     {
+        ChatMessageReceiver messTextArea;
+        int xOffset;
 
+        if (sender.equals(localuser)) {
+            messTextArea = new ChatMessageReceiver("<html>"+text+"</html>",new java.awt.Color(18, 18, 18));
+            messTextArea.setBorder(new EmptyBorder(10,10,10,10));
+            xOffset = LocalSenderStartOffsetMessage;
+            messTextArea.setBackground(new java.awt.Color(187,134,252));
+        } else {
+            messTextArea = new ChatMessageReceiver("<html>"+text+"</html>",new java.awt.Color(227,227,227));
+            messTextArea.setBorder(new EmptyBorder(10,10,10,10));
+            xOffset = RemoteSenderStartOffsetMessage;
+            messTextArea.setBackground(new java.awt.Color(18, 18, 18));
+        }
+
+        messTextArea.setBorder(null);
+
+        // Calculate the bounds based on the message width
+        int width = messTextArea.getPreferredSize().width;
+        int height = SingleLineMessageHeight * ((width / (MaxMessageWidth)) + 1);
+
+        messTextArea.setBounds(xOffset, YLastMessage, MaxMessageWidth, height);
+        chat.add(messTextArea);
+
+        // Update YLastMessage
+        YLastMessage += height + fixedMessageYOffset;
+
+        // Update chat size and repaint
+        chat.setPreferredSize(new Dimension(319, YLastMessage + SingleLineMessageHeight));
+        chat.revalidate();
+        chat.repaint();
+
+       
+        //non va, da rivedere il codice della scrollPane
+        //scrollPane.getViewport().setViewPosition(new Point(0,(height*(MsgsContacts.get(this.getIndexList(sender))).size())));
+        
+
+        /* 
         ChatMessageReceiver MessTextAreaR;
         ChatMessageSender MessTextAreaS;
+        
 
         if(sender.equals(localuser)){
-            MessTextAreaR = new ChatMessageReceiver(text);
-            //MessTextAreaR.setBounds(RemoteSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaR.getPreferredSize().width/MaxMessageWidth)+1)));
             
-            MessTextAreaR.setSize(400,100);
-            MessTextAreaR.setLocation(10, 10);
-            chat.add(MessTextAreaR);
-            MessTextAreaR.setVisible(true);
+            MessTextAreaS = new ChatMessageSender(text);
+
+            MessTextAreaS.setSize(400,100);
+            MessTextAreaS.setLocation(10, 10);
+            YLastMessage+= (SingleLineMessageHeight*((MessTextAreaS.getPreferredSize().width/MaxMessageWidth)+1) + fixedMessageYOffset);
+
+            MessTextAreaS.setBounds(LocalSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaS.getPreferredSize().width/MaxMessageWidth)+1)));
+            chat.add(MessTextAreaS);
+            MessTextAreaS.setVisible(true);
         }  
         else{
             
-            MessTextAreaS = new ChatMessageSender(text);
-            MessTextAreaS.setSize(400,100);
-            MessTextAreaS.setLocation(10, 10);
-            //MessTextAreaS.setBounds(LocalSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaS.getPreferredSize().width/MaxMessageWidth)+1)));
-            chat.add(MessTextAreaS);
-            MessTextAreaS.setVisible(true);
-        }
+            MessTextAreaR = new ChatMessageReceiver(text);
+            MessTextAreaR.setBounds(RemoteSenderStartOffsetMessage, YLastMessage, MaxMessageWidth, (SingleLineMessageHeight*((MessTextAreaR.getPreferredSize().width/MaxMessageWidth)+1)));
             
-        //update the last y coordinate of the message
-        //update the y size of the scroll bar
+            MessTextAreaR.setSize(400,100);
+            MessTextAreaR.setLocation(10, 10);
+
+            YLastMessage+= (SingleLineMessageHeight*((MessTextAreaR.getPreferredSize().width/MaxMessageWidth)+1) + fixedMessageYOffset);
+
+            chat.add(MessTextAreaR);
+            MessTextAreaR.setVisible(true);
+
+        }
+        
         chat.setPreferredSize(new Dimension(319, YLastMessage+SingleLineMessageHeight));
         chat.revalidate();
         chat.repaint();
         //clear the input text area
         messaggio_field.selectAll();
         messaggio_field.replaceSelection("");
-        chat.setVisible(true);
+        chat.setVisible(true);*/
     }
 
     //metodo per ottenere la lista dei messaggi di un determinato contatto dal thread
@@ -466,10 +529,9 @@ public class LoggedIndex extends javax.swing.JFrame {
     //metodo per aggiungere un nuovo messaggio al db di messaggi locale
     public void getSendMsg(Message msg){
         //ottieni chi manda il messaggio, ricerca a che posizione dell'array si trova la chat e aggiungi un elemento alla chat
-        System.out.println(msg.getMsg() + " " + msg.getSender());
         int index = this.getIndexList(msg.getSender());
         MsgsContacts.get(index).add(msg);   
-
+        AddChatText(msg.getMsg(), msg.getSender());
         //PARTE CHE AGGIUNGE A GUI CHE NON SO COME FARE AIUTAMI TI PREGO DIO SANTO
     }
 

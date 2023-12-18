@@ -36,7 +36,7 @@ public class ChatMessageSender extends javax.swing.JPanel {
         setBackground(new java.awt.Color(187, 134, 252));
 
         jLabel2.setBackground(new java.awt.Color(241, 241, 241));
-        jLabel2.setForeground(new java.awt.Color(31, 31, 31));
+        jLabel2.setForeground(new java.awt.Color(227,227,227));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText(text);
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
