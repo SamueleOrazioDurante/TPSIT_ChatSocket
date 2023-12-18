@@ -43,7 +43,7 @@ public class ChatClientThread extends Thread{
 
                 //recupero l'operazione da eseguire dal pacchetto
                 String operation = pkt.getElementsByTagName("Operation").item(0).getTextContent();
-                /* 
+                
                 //si utilizza l'approccio a eventi, in base a quello che succede, dovrà accadere un determinato evento
                 switch (operation) {
                     //,,,
@@ -62,7 +62,7 @@ public class ChatClientThread extends Thread{
                         }
 
                         //mandiamo all'interfaccia l'arraylist dei messaggi (a sua volta un arraylist con messaggio,sender e receiver)
-                        clientInterface.GetLoadChat(chatMsgs);
+                        clientInterface.getLoadChat(chatMsgs);
                         
                         break;
                     }
@@ -71,7 +71,7 @@ public class ChatClientThread extends Thread{
                         //prendiamo il messaggio dal pacchetto xml e lo mandiamo all'interfaccia della chat
                         Element e = (Element) pkt.getElementsByTagName("XMLMsg");
                         Message msg = new Message(e.getElementsByTagName("Content").item(0).getTextContent(),e.getElementsByTagName("Sender").item(0).getTextContent());
-                        clientInterface.GetSendMsg(msg);
+                        clientInterface.getSendMsg(msg);
                         
                         break;
                     }
@@ -98,7 +98,7 @@ public class ChatClientThread extends Thread{
                         break;
                     }
 
-                }*/
+                }
             }
         }catch(ClassNotFoundException | IOException e){
             e.printStackTrace();

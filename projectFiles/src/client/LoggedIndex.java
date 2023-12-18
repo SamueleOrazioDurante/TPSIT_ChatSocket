@@ -342,13 +342,28 @@ public class LoggedIndex extends javax.swing.JFrame {
     }
 
     //metodo per aggiungere un nuovo messaggio al db di messaggi locale
-    public void getLoadMsg(Message msg){
+    public void getSendMsg(Message msg){
         //ottieni chi manda il messaggio, ricerca a che posizione dell'array si trova la chat e aggiungi un elemento alla chat
+        
+        int index = this.getIndexList(msg.getSender());
+        MsgsContacts.get(index).add(msg);
+
+        //PARTE CHE AGGIUNGE A GUI CHE NON SO COME FARE AIUTAMI TI PREGO DIO SANTO
     }
 
     //metodo per mandare l'ack
     public void getSentMsgAck(){
         // ?TBD
+    }
+
+    public int getIndexList(String usr){
+        //
+        int index = -1;
+        for(int i=0;i<Contacts.size();i++){
+            if(Contacts.get(i).equals(usr))
+                index = i;
+        }
+        return index;
     }
 
 
