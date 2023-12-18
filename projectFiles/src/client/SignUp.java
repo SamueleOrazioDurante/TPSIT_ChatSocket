@@ -24,7 +24,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author matt3
  */
-public class Signup extends javax.swing.JFrame {
+public class SignUp extends javax.swing.JFrame {
 
     //variabili della classe signup
     ChatClientProxy proxy;
@@ -32,7 +32,7 @@ public class Signup extends javax.swing.JFrame {
     /**
      * Creates new form Signup
      */
-    public Signup() {
+    public SignUp() {
         initComponents();
         centrareJFrame();
         setIconaImage();
@@ -286,7 +286,7 @@ public class Signup extends javax.swing.JFrame {
             if(logResult == 1){
                 //nascondo la pagina di signUp
                 new Login().setVisible(true);
-                Signup.this.setVisible(false);
+                SignUp.this.setVisible(false);
 
             }else{
                 JOptionPane.showMessageDialog(null,"Username già utilizzato");
@@ -295,7 +295,7 @@ public class Signup extends javax.swing.JFrame {
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
         new Login().setVisible(true);
-        Signup.this.setVisible(false);
+        SignUp.this.setVisible(false);
     }//GEN-LAST:event_loginBtnMouseClicked
 
     /**
@@ -315,20 +315,20 @@ public class Signup extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Signup().setVisible(true);
+                new SignUp().setVisible(true);
 
             }
         });
