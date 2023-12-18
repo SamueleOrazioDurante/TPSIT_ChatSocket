@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
@@ -24,8 +25,16 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class LoggedIndex extends javax.swing.JFrame {
 
     //variabili della classe LoggedIndex
-    String localuser = "UserNotFound";
-
+    String localuser = "UserNotFound";  //utilizzata nel caso il programma venga aperto in modo non corretto 
+    
+    //arraylist -> database locale
+    ArrayList<String> Contacts = new ArrayList<String>(); //arraylist di contatti
+    ArrayList<ArrayList<Message>> MsgsContacts = new ArrayList<ArrayList<Message>>(); // arraylist di arraylist di messaggi (uno per utente)
+    
+    //
+    
+    
+    
     /**
      * Creates new form Login2
      */
