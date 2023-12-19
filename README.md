@@ -8,7 +8,7 @@ Questo progetto è stato sviluppato in seguito a un compito assegnatoci dal prof
 
 ## 📕 Manuale
 
-### Server
+### 🗄️ Server
 
 Andare alla sezione "Release" di questa repository chiamata Ketu-server-x e scaricare il file server.zip; 
 
@@ -27,7 +27,7 @@ Avviare la classe index.java.
 
 <img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/open-index-server.gif" height="400" width="800">
 
-### Client
+### 💻 Client
 
 Andare alla sezione "Release" di questa repository chiamata Ketu-client-x e scaricare il file Ketu-client-x.exe; 
 
@@ -39,7 +39,7 @@ Aprire l'applicativo tramite il file Ketu-client.exe
 
 <img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/open-exe-client.gif" height="400" width="800">
 
-#### Registrazione
+#### 📝 Registrazione
 
 Premere sul tasto "Registrati" sulla pagina di Login.
 
@@ -50,13 +50,13 @@ Inserire username e password e premere nuovamente sul tasto registrati.
 <img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/login.gif" height="400" width="800">
 
 
-#### Login
+#### 🔐 Login
 
 Inserire username e password e premere sul tasto login.
 
 <img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/login.gif" height="400" width="800">
 
-#### Utilizzo
+#### 🗣️ Utilizzo
 
 Una volta fatta la registrazione e il login, sei libero di scegliere tra i contatti gia' registrati e avviare una chat in tempo reale con loro
 
