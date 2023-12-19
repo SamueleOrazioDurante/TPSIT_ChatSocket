@@ -12,46 +12,49 @@ Questo progetto è stato sviluppato in seguito a un compito assegnatoci dal prof
 
 Andare alla sezione "Release" di questa repository chiamata Ketu-server-x e scaricare il file server.zip; 
 
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/download-server.gif" height="400" width="800">
 
-Decomprimere il file e aprire la cartella "projectFiles" con un qualsiasi IDE (preferibilmente VSCode dove e' stato creato e testato).
+Decomprimere la cartella compressa. 
 
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/unzip-server.gif" height="400" width="800">
+
+Aprire la cartella "projectFiles" con un qualsiasi IDE (preferibilmente VSCode dove e' stato creato e testato).
+
+
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/open-folder-server.gif" height="400" width="800">
 
 Avviare la classe index.java.
 
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/open-index-server.gif" height="400" width="800">
 
 ### Client
 
 Andare alla sezione "Release" di questa repository chiamata Ketu-client-x e scaricare il file Ketu-client-x.exe; 
 
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/download-client.gif" height="400" width="800">
 
 Installare una versione di Java Run Enviroment...
 
 Aprire l'applicativo tramite il file Ketu-client.exe
 
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/open-exe-client.gif" height="400" width="800">
 
 #### Registrazione
 
 Premere sul tasto "Registrati" sulla pagina di Login.
 
-<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/GIFTest.gif"  height="400" width="800">
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/register.gif" height="400" width="800">
 
 Inserire username e password e premere nuovamente sul tasto registrati.
 
-<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/GIFTest.gif"  height="400" width="800">
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/login.gif" height="400" width="800">
+
 
 #### Login
 
 Inserire username e password e premere sul tasto login.
 
-<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/GIFTest.gif"  height="400" width="800">
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/login.gif" height="400" width="800">
 
 #### Utilizzo
 
