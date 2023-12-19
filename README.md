@@ -57,7 +57,7 @@ Inserire username e password e premere sul tasto login.
 
 Una volta fatta la registrazione e il login, sei libero di scegliere tra i contatti gia' registrati e avviare una chat in tempo reale con loro
 
-<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/send-msg.gif"  height="400" width="800">
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/send-msg.gif" height="400" width="800">
 
 ## 🧑 Autori
 
