@@ -38,27 +38,26 @@ Aprire l'applicativo tramite il file Ketu-client.exe
 
 Premere sul tasto "Registrati" sulla pagina di Login.
 
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/GIFTest.gif"  height="400" width="800">
 ![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
 
 Inserire username e password e premere nuovamente sul tasto registrati.
 
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/GIFTest.gif"  height="400" width="800">
 ![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
 
 #### Login
 
 Inserire username e password e premere sul tasto login.
 
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/GIFTest.gif"  height="400" width="800">
 ![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg)
 
 #### Utilizzo
 
 Una volta fatta la registrazione e il login, sei libero di scegliere tra i contatti gia' registrati e avviare una chat in tempo reale con loro
 
-![Main](https://github.com/SamOraDur/TPSIT_ChatSocket/blob/main/projectFiles/src/png/perManuale/1.jpg
-
-#TDB
-
-<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/GIFTest.gif"  height="400" width="800">
+<img src="https://github.com/SamOraDur/TPSIT_ChatSocket/blob/projectFiles/src/main/png/perManuale/send-msg.gif"  height="400" width="800">
 
 ## 🧑 Autori
 
