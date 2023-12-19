@@ -374,7 +374,7 @@ public class LoggedIndex extends javax.swing.JFrame {
     //metodo per ottenere la lista di tutti i contatti dal thread
     public void getLoadContacts(ArrayList<String> c){
         Contacts = c;
-        //cerco e rimuovo l'utente locale
+        //cerco e rimuovo l'utente locale (da implementare nel server per maggiore velocità)
         for(int i=0;i<Contacts.size();i++){
             if(Contacts.get(i).equals(localuser)){
                 Contacts.remove(i);
@@ -421,9 +421,11 @@ public class LoggedIndex extends javax.swing.JFrame {
         scrollPane.revalidate();
     }
     
+    //quando clicco un utente...
     private void jContactMouseListener(java.awt.event.MouseEvent evt) {    
         messaggio_field.setEditable(true);
         YLastMessage = 0;  // reset the Last Message y coordinate
+        
         //remove all message in Jpanel Chat screen and refresh it
         chat.removeAll(); 
         chat.revalidate();

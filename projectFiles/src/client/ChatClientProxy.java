@@ -144,7 +144,7 @@ public class ChatClientProxy implements ChatFeat{
     }
 
     @Override
-    //metodo
+    //metodo per richiedere al server la lista dei contatti
     public NodeList LoadContacts(String usr){
         
         try {

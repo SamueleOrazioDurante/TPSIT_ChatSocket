@@ -124,11 +124,11 @@ public class ServerThread extends Thread {
 							Document msgPktOut = msgBuilder.createMsgXMLObj(msg);
 							oos.writeObject(msgPktOut);
 
+							sk.AddMsgTerminal("	\t[Server]: Invio del messaggio al destinatario eseguito con successo.");
+
 						} catch (SocketException | NullPointerException e) {
 							e.printStackTrace();
 						}
-						
-						sk.AddMsgTerminal("	\t[Server]: Invio del messaggio al destinatario eseguito con successo.");
 
 						//pacchetto per informare il mittente che il messaggio è arrivato al destinatario
 						Document ackPacket = msgBuilder.createAckXMLObj();
